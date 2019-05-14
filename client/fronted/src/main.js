@@ -3,11 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-/**
- *mock
- */
-import MockFn from '@/assets/js/mock/mockServer.js'
-MockFn(true)
+/*px2rem-loader：将css中的px转为rem单位，用了它就不用自己计算rem值了
+lib-flexible：根据设备宽度，修改根元素html的font-size，以适配不同终端*/
+import 'lib-flexible'
+import '@/assets/js/utils/rem.js'
 
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)
