@@ -7,6 +7,14 @@ import store from './store'
 lib-flexible：根据设备宽度，修改根元素html的font-size，以适配不同终端*/
 import 'lib-flexible'
 import '@/assets/js/utils/rem.js'
+/*import postCss from '@/assets/js/utils/postcss.config.js'
+
+console.log(11,postCss)*/
+/**
+ * vant
+ */
+import { Button, Row, Col } from 'vant';
+Vue.use(Button,Row,Col)
 
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)

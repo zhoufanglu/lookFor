@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import { Button, Cell, Toast } from 'vant';
-Vue.use(Button)
+import { Toast } from 'vant';
+
 //接口配置
 import api from '@/request/api'
 

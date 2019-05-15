@@ -4,6 +4,9 @@
         <div class="p-form" >
             <input type="text">
             <van-button type="primary">主要按钮</van-button>
+            <div class="test-body">
+                123
+            </div>
         </div>
     </div>
 </template>
@@ -70,6 +73,11 @@
             align-items: center;
             justify-content: center;
             margin: 0 auto;
+            .test-body{
+                width: 100px;
+                height: 50px;
+                border: solid 1px red;
+            }
         }
     }
 </style>

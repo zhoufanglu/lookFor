@@ -43,8 +43,11 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [
+          require('autoprefixer')({
+            browsers: ['Android >= 4.0', 'iOS >= 7']
+          }),
           require('postcss-px2rem')({ //配置项，详见官方文档
-            remUnit: 30
+            remUnit: 37.5
           }), // 换算的基数
         ]
       }
