@@ -36,13 +36,15 @@ router.afterEach(() => {
 /**
  * 保持vuex内的数据刷新不消失
  * 这个有个缺陷，当你删除或者修改了state里面的参数，1、先注释掉下面的代码，2、删除localStore里面的参数，再刷新下就好了。。
+ * 弃用了这个方法
+ * ---->使用了vuex-persist这个插件
  * */
 //页面加载时把localStorage的数据放入vuex
-localStorage.getItem("vuexState(hello-world)")&&
+/*localStorage.getItem("vuexState(hello-world)")&&
 store.replaceState(
   Object.assign(store.state,JSON.parse(localStorage.getItem("vuexState(hello-world)")))
 )
 //页面刷新前把vuex的数据放入localStorage
 window.addEventListener("beforeunload",()=>{
   localStorage.setItem("vuexState(hello-world)",JSON.stringify(store.state))
-})
+})*/

@@ -1,0 +1,13 @@
+@charset "UTF-8";
+@mixin vertical-center { // 垂直水平居中
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin ellipsis($line){ // 超出行显示...
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+}

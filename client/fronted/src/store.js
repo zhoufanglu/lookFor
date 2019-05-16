@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '@/router'
+import VuexPersistence from 'vuex-persist'
 Vue.use(Vuex)
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
 
 export default new Vuex.Store({
   state: {
@@ -22,22 +27,16 @@ export default new Vuex.Store({
       }
       state.networkSuccess = val
     },
+    //改变个人信息
     CHANGE_USER_INFO(state,val) {
       state.userInfo = val
     },
+    //登录状态
     CHANGE_TOKEN(state,val){
       state.token = val
     },
-    INCREMENT(state){
-        //state.countTest++
-    }
   },
   actions: {
-    increment( {commit } ){
-        setTimeout(()=>{
-          commit('INCREMENT')
-        },1000)
-    },
     changeUserInfo( { commit }, val ){
       commit('CHANGE_USER_INFO', val)
     },
@@ -47,5 +46,6 @@ export default new Vuex.Store({
     changeToken({ commit }, val){
       commit('CHANGE_TOKEN', val)
     }
-  }
+  },
+  plugins:[vuexLocal.plugin]
 })
