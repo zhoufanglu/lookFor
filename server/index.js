@@ -30,9 +30,13 @@ app.post('/test/:data',(req,res)=>{
   })
 })
 
+app.get('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx997337d2d17c5a12&redirect_uri=https://proctor.ata.net.cn&response_type=code&scope=snsapi_userinfo&state=login#wechat_redirect',(req,res)=>{
+  console.log(34,res)
+})
+
 //console.log(33,sqlFn.getAllNowLocation())
 /*
 console.log(33,SqlFn)
 SqlFn.getAllNowLocation()*/
 
-sqlFn.getAllNowLocation()
+//sqlFn.getAllNowLocation()

@@ -61,6 +61,7 @@
               password: this.password
             })
             this.changeToken(true)
+            this.$router.push({path:'home'})
           }
           //登录失败
           else {

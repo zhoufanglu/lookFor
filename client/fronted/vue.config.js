@@ -50,6 +50,9 @@ module.exports = {
             remUnit: 37.5
           }), // 换算的基数
         ]
+      },
+      sass: { //全局scss
+        data: `@import "@/assets/scss/entrance.scss";`
       }
     },
     // 启用 CSS modules for all css / pre-processor files.
@@ -65,7 +68,7 @@ module.exports = {
   devServer: {
     open: process.platform === 'darwin',
     host: '0.0.0.0',
-    port: 8080,
+    port: 8082,
     https: false,
     hotOnly: false,
     proxy: {

@@ -1,16 +1,30 @@
 <template>
     <div class="header-content">
-        <button @click="logout">注销</button>
+        <van-nav-bar
+                :title=name
+                left-text="返回"
+                right-text="注销"
+                left-arrow
+                @click-left="onClickLeft"
+                @click-right="onClickRight"
+        />
     </div>
 </template>
 <script>
   import {mapActions } from 'vuex';
   export default {
     name: '',
+    props:['name'],
     data() {
       return {}
     },
     methods: {
+      onClickLeft() {
+        this.$router.go(-1)
+      },
+      onClickRight() {
+        this.logout()
+      },
       logout(){
         this.changeUserInfo({})
         this.changeToken(false)
@@ -27,11 +41,13 @@
 </script>
 <style lang="scss">
     .header-content{
-        background-color: #3A71A8;
-        color: black;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+
+    }
+</style>
+<style lang="scss"scoped>
+    .header-content{
+        .van-nav-bar__text{
+            color: $dark;
+        }
     }
 </style>
