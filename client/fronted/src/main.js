@@ -11,7 +11,7 @@ import 'lib-flexible'
 /**
  * vant
  */
-import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,Step, Steps,NavBar} from 'vant';
+import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,Step, Steps,NavBar,Actionsheet } from 'vant';
 
 Vue.use(Row)
 Vue.use(Col)
@@ -24,6 +24,7 @@ Vue.use(Tag)
 Vue.use(Step)
 Vue.use(Steps)
 Vue.use(NavBar)
+Vue.use(Actionsheet)
 
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)

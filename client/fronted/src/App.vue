@@ -12,6 +12,12 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  .icon {
+    width: .75rem; height: .75rem;
+    vertical-align: -0.15rem;
+    fill: currentColor;
+    overflow: hidden;
+  }
 }
 #nav {
   padding: 30px;

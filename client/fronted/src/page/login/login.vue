@@ -54,14 +54,7 @@
           if (this.userName === 'admin' && this.password === '123456') {
             mes = '登录成功！'
             color = '#3399ff'
-            //store
-            this.changeUserInfo({
-              isLogin: true,
-              userName: this.userName,
-              password: this.password
-            })
-            this.changeToken(true)
-            this.$router.push({path:'home'})
+            this.changeUserStore()
           }
           //登录失败
           else {
@@ -74,10 +67,18 @@
             background: color
           })
         } else if (this.loginBtnState === 'visitor') {
-          /*this.$route.push({
-
-          })*/
+          this.changeUserStore()
         }
+      },
+      changeUserStore(){
+        //store
+        this.changeUserInfo({
+          isLogin: true,
+          userName: this.userName,
+          password: this.password
+        })
+        this.changeToken(true)
+        this.$router.push({path:'home'})
       },
       exchangeBtnState(){
         let tipVal = ''
@@ -97,7 +98,7 @@
     mounted() {
       this.redirect = this.$route.query.redirect
       if(this.token){
-        this.$router.go(-1)
+        this.$router.push({path:'home'})
       }
     }
   }

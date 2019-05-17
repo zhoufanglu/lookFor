@@ -5,6 +5,9 @@ import 'nprogress/nprogress.css'
 //vuex
 import store from '@/store'
 
+//iconfont
+import  '@/assets/iconfont/iconfont.js'
+
 nprogress.configure({
   easing: 'ease',  // 动画方式
   speed: 500,  // 递增进度条的速度

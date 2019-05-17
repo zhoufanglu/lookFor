@@ -1,6 +1,6 @@
 <template>
     <div class="p-home">
-        <header-content name="信息采集">
+        <header-content name="信息采集" isShowReturn="false">
         </header-content>
         <van-steps
                 :active="active"
@@ -9,7 +9,6 @@
         >
             <van-step>个人信息</van-step>
             <van-step>商家接单</van-step>
-            <van-step>交易完成</van-step>
             <van-step>交易完成</van-step>
         </van-steps>
     </div>

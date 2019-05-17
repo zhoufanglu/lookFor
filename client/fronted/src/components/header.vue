@@ -1,12 +1,30 @@
 <template>
     <div class="header-content">
-        <van-nav-bar
-                :title=name
-                left-text="返回"
-                right-text="注销"
-                left-arrow
-                @click-left="onClickLeft"
-                @click-right="onClickRight"
+        <!--head-->
+        <div class="head-row">
+            <van-row type="flex" justify="space-between" align="center">
+                <van-col span="2">
+                    <svg v-if="isShowReturn!=='false'" class="icon return-icon" aria-hidden="true"@click="onClickLeft">
+                        <use xlink:href="#iconicon-test2"></use>
+                    </svg>
+                </van-col>
+                <van-col span="20" class="title">
+                    {{name}}
+                </van-col>
+                <van-col span="2">
+                    <svg class="icon return-icon" aria-hidden="true" @click="onClickRight">
+                        <use xlink:href="#icongengduo1"></use>
+                    </svg>
+                </van-col>
+            </van-row>
+        </div>
+        <!--operate btn mask-->
+        <van-actionsheet
+                v-model="operateInfo.show"
+                :actions="operateInfo.actions"
+                @select="onSelect"
+                cancel-text="取消"
+                @cancel="onCancel"
         />
     </div>
 </template>
@@ -14,16 +32,34 @@
   import {mapActions } from 'vuex';
   export default {
     name: '',
-    props:['name'],
+    props:['name','isShowReturn'],
     data() {
-      return {}
+      return {
+        operateInfo:{
+          show: false,
+          actions: [
+            {
+              name: '注销'
+            },
+          ]
+        },
+      }
     },
     methods: {
       onClickLeft() {
         this.$router.go(-1)
       },
       onClickRight() {
-        this.logout()
+        this.operateInfo.show = true
+      },
+      onSelect(item){
+        if(item.name === '注销'){
+          this.logout()
+        }
+        //this.logout()
+      },
+      onCancel(){
+
       },
       logout(){
         this.changeUserInfo({})
@@ -36,12 +72,18 @@
     },
     components: {},
     mounted() {
+
     }
   }
 </script>
 <style lang="scss">
     .header-content{
-
+        .head-row{
+            padding: 6px;
+            .title{
+                font-size: 18px;
+            }
+        }
     }
 </style>
 <style lang="scss"scoped>
