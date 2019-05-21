@@ -76,20 +76,24 @@
     }
   }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     .header-content{
         .head-row{
-            padding: 6px;
+            padding: 16px 6px;
             .title{
                 font-size: 18px;
+                .edit-icon{
+                    margin-right: 6px;
+                }
+                @include vertical-center;
             }
         }
     }
 </style>
 <style lang="scss"scoped>
-    .header-content{
+   /* .header-content{
         .van-nav-bar__text{
             color: $dark;
         }
-    }
+    }*/
 </style>

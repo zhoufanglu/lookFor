@@ -5,23 +5,28 @@
         </div>
         <div class="p-form" >
             <van-cell-group class="form-content">
-                <van-field
-                        v-model="userName"
-                        required
-                        clearable
-                        label="用户名"
-                        right-icon="question-o"
-                        placeholder="请输入用户名"
-                        @click-right-icon="$toast('用户名为admin,密码为123456')"
-                />
-
-                <van-field
-                        v-model="password"
-                        type="password"
-                        label="密码"
-                        placeholder="请输入密码"
-                        required
-                />
+                <div class="input-row">
+                    <svg class="icon return-icon" aria-hidden="true">
+                        <use xlink:href="#iconuser"></use>
+                    </svg>
+                    <van-field
+                            v-model="userName"
+                            clearable
+                            right-icon="question-o"
+                            placeholder="请输入用户名"
+                            @click-right-icon="$toast('用户名为admin,密码为123456')"
+                    />
+                </div>
+                <div class="input-row">
+                    <svg class="icon return-icon" aria-hidden="true">
+                        <use xlink:href="#iconiconzhengli-"></use>
+                    </svg>
+                    <van-field
+                            v-model="password"
+                            type="password"
+                            placeholder="请输入密码"
+                    />
+                </div>
             </van-cell-group>
             <van-row class="login-row" type="flex" justify="center">
                 <van-col span="8" v-show="loginBtnState === 'login'"><van-button  @click="login" class="login-button" type="default">登录</van-button></van-col>
@@ -112,6 +117,9 @@
             justify-content: center;
             margin: 0 auto;
             margin-top: 30px;
+            .input-row{
+                @include vertical-center;
+            }
             .form-content{
                 width: 80%;
             }

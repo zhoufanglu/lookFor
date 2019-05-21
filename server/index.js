@@ -15,6 +15,7 @@ app.listen(8001,()=>{
 let login = true
 //拦截器
 app.all('*',(req,res,next)=>{
+  res.header("Access-Control-Allow-Origin", "*");//允许所有跨域请求
   if(!login){
     return res.json('未登录')
   }else{
@@ -57,9 +58,11 @@ app.get('/test',(req,res)=>{
 app.post('/getNowLocation',async (req,res)=>{
   // 现在
   const rows = await query('select * from now_location;')
+  //res.header({"Content-Type":"application/x-www-form-urlencoded"});
   res.json({
-    code: 0,
+    code: 200,
     msg: '请求成功',
     data: rows
   })
 })
+

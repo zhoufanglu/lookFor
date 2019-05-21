@@ -11,6 +11,12 @@ const user = {
       '/login',
       params
     )
+  },
+  getNowLocation(params){
+    //console.log(16,`${base.nodeServer}/getNowLocation`)
+    return axios.post(
+      `${base.nodeServer}/getNowLocation`,
+    )
   }
 }
 export default user
