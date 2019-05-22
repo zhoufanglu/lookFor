@@ -25,7 +25,7 @@ const tip = msg => {
  */
 const toLogin = () => {
   router.replace({
-    path: '/login',
+    path: '/user',
     query: {
       redirect: router.currentRoute.fullPath
       // 将跳转的路由path作为参数，登录成功后跳转到该路由

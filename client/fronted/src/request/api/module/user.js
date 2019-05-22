@@ -8,14 +8,20 @@ import qs from 'qs'; // 根据需求是否导入qs模块
 const user = {
   login(params){
     return axios.post(
-      '/login',
+      '/user',
       params
     )
   },
-  getNowLocation(params){
+  getNowLocation(){
     //console.log(16,`${base.nodeServer}/getNowLocation`)
     return axios.post(
       `${base.nodeServer}/getNowLocation`,
+    )
+  },
+  register(username){
+    return axios.post(
+      `${base.nodeServer}/register`,
+      {username:username}
     )
   }
 }

@@ -1,12 +1,22 @@
 const express = require('express')//框架
-const bodyParser = require('body-parser')//解析参数
+const bodyParser = require('body-parser')//解析post参数
 const cors = require('cors')//解决跨域
 //import sqlFn from './mysql/select'
-import query from './mysql/config'
+import query from './mysql/config'//数据库封装
+
+//引入userSQL语句
+import userSQL from './mysql/sql/userSQL'
+
+//引入公用方法插件
+import {analyticState} from './plugin/global'
+
 const app = express()
-app.use(bodyParser.json())//json请求
+
+//解析application/json
+app.use(bodyParser.json());
+
+
 app.use(cors()) //解决跨域
-//app.use(bodyParser.urlencoded({extended:false}))//表单请求
 
 app.listen(8001,()=>{
   console.log('服务启动')
@@ -64,5 +74,31 @@ app.post('/getNowLocation',async (req,res)=>{
     msg: '请求成功',
     data: rows
   })
+})
+//解析返回状态
+/*let analyticState =(state,msg,data)=>{
+  return {
+    state:state,
+    msg:msg,
+    data:data
+  }
+}*/
+
+/**
+ * 注册
+ */
+app.post('/register',async (req,res)=>{
+  //console.log(79,userSQL.getUserByNickname('admin'))
+  const userInfo = await query(userSQL.getUserByNickname(req.body.username))
+  //先判断有没有注册过
+  console.log(50,userInfo)
+  let sendItem = {}
+  if(userInfo.length === 0){
+    sendItem = analyticState('success','注册成功',req.body)
+  }else{
+    sendItem = analyticState('err','该用户名已经存在',userInfo)
+  }
+  //若没有，注册成功
+  res.json(sendItem)
 })
 

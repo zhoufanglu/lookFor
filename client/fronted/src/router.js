@@ -8,7 +8,8 @@ const error_404 = () => import('@/page/errorPage/error_404.vue')
 const error_401 = () => import('@/page/errorPage/error_401.vue')
 const home = ()=> import('@/page/home.vue')
 const test = ()=> import('@/page/test/test.vue')
-const login = ()=>import('@/page/login/login.vue')
+const login = ()=>import('@/page/user/login.vue')
+const register = ()=>import('@/page/user/register.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
 
@@ -51,6 +52,11 @@ export default new Router({
       path:'/login',
       name:'login',
       component: login
+    },
+    {
+      path:'/register',
+      name:'register',
+      component: register
     }
   ]
 })

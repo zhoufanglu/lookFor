@@ -49,3 +49,8 @@ export function isArray(arg) {
   }
   return Array.isArray(arg)
 }
+
+//去除string两边空白
+export function trim(str){
+  return str.replace(/(^\s*)|(\s*$)/g, "");
+}

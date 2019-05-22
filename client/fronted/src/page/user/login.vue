@@ -35,6 +35,11 @@
                     <van-icon class="icon-exchange" name="exchange" @click="exchangeBtnState" />
                 </van-col>
             </van-row>
+            <van-row>
+                <van-col span="24" class="register-btn">
+                    <span @click="goRegister">没有账号？点击注册</span>
+                </van-col>
+            </van-row>
         </div>
     </div>
 </template>
@@ -94,6 +99,9 @@
           this.$toast(tipVal)
         }
       },
+      goRegister(){
+        this.$router.push({path:'/register'})
+      },
       ...mapActions(['changeUserInfo','changeToken'])
     },
     components: {},
@@ -138,6 +146,13 @@
                     }
                 }
             }
+        }
+        .register-btn{
+            color: $theme;
+            font-size: 12px;
+            margin-top: 12px;
+            margin-left: -16px;
+            white-space: nowrap;
         }
     }
 </style>

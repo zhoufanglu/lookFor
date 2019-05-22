@@ -20,7 +20,7 @@ router.beforeEach((to, from , next) => {
   //未登录
   if(to.meta.requiresAuth){
     if(!store.state.userInfo.isLogin
-      &&(to.path!=='/login'&&to.path!=='/401')){
+      &&(to.path!=='/user'&&to.path!=='/401')){
       next(`/401?redirect=${to.path}`)
     }
   }
