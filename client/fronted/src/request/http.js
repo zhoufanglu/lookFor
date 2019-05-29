@@ -1,3 +1,4 @@
+import { Notify } from 'vant';
 /**
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
@@ -8,15 +9,16 @@ import store from '@/store';
 //import { Toast } from 'vant';
 
 /**
- * 提示函数
- * 禁止点击蒙层、显示一秒后关闭
+ *
+ * @param msg  提示信息
+ * @param color 背景颜色
  */
-const tip = msg => {
-  /*Toast({
+const tip = (msg,color='#1989fa') =>{
+  Notify({
     message: msg,
     duration: 2000,
-    forbidClick: true
-  });*/
+    background: color
+  });
 }
 
 /**
@@ -25,7 +27,7 @@ const tip = msg => {
  */
 const toLogin = () => {
   router.replace({
-    path: '/user',
+    path: '/login',
     query: {
       redirect: router.currentRoute.fullPath
       // 将跳转的路由path作为参数，登录成功后跳转到该路由
@@ -47,9 +49,8 @@ const errorHandle = (status, other) => {
     // 403 token过期
     // 清除token并跳转登录页
     case 403:
-      tip('登录过期，请重新登录');
-      localStorage.removeItem('token');
-      store.commit('changeLogin', false);
+      tip('登录过期，请重新登录','red');
+      store.dispatch('changeToken', null);
       setTimeout(() => {
         toLogin();
       }, 1000);
@@ -112,7 +113,7 @@ instance.interceptors.response.use(
       // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
       // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
       store.dispatch('changeNetwork', false);
-      tip('网络异常!');
+      tip('网络异常!','red');
       router.push({path:'refresh'})
     }
   });

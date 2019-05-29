@@ -11,7 +11,7 @@ import 'lib-flexible'
 /**
  * vant
  */
-import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,Actionsheet,Tab, Tabs,RadioGroup, Radio,Picker,Popup  } from 'vant';
+import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,Actionsheet,Tab, Tabs,RadioGroup, Radio,Picker,Popup } from 'vant';
 
 Vue.use(Row)
 Vue.use(Col)
@@ -38,4 +38,5 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
 

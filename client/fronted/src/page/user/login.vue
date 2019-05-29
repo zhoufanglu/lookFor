@@ -29,8 +29,8 @@
                 </div>
             </van-cell-group>
             <van-row class="login-row" type="flex" justify="center">
-                <van-col span="8" v-show="loginBtnState === 'login'"><van-button  @click="login" class="login-button" type="default">登录</van-button></van-col>
-                <van-col span="8" v-show="loginBtnState === 'visitor'"><van-button @click="login" class="login-button" type="default">游客登录</van-button></van-col>
+                <van-col span="8" v-show="loginCate === 'user'"><van-button  @click="login" class="login-button" type="default">登录</van-button></van-col>
+                <van-col span="8" v-show="loginCate === 'visitor'"><van-button @click="login" class="login-button" type="default">游客登录</van-button></van-col>
                 <van-col span="2" class="icon-item">
                     <van-icon class="icon-exchange" name="exchange" @click="exchangeBtnState" />
                 </van-col>
@@ -52,33 +52,32 @@
       return{
         userName:'admin',
         password:'123456',
-        loginBtnState:'login'//visitor 游客登录/登录
+        loginCate:'user',//visitor/user 游客/用户登录
+        tokenVal:null
       }
     },
     methods: {
       login() {
-        if (this.loginBtnState === 'login') {
-          let mes = ''
-          let color = ''
-          //登录成功
-          if (this.userName === 'admin' && this.password === '123456') {
-            mes = '登录成功！'
-            color = '#3399ff'
-            this.changeUserStore()
-          }
-          //登录失败
-          else {
-            mes = '账号密码有误！'
-            color = '#fe575c'
-          }
-          this.$notify({
-            message: mes,
-            duration: 2000,
-            background: color
-          })
-        } else if (this.loginBtnState === 'visitor') {
-          this.changeUserStore()
+        if (this.loginCate === 'visitor') {
+          this.userName = '游客'
+          this.password =''
         }
+      let color = ''
+      this.$api.user.login(this.userName,this.password,this.loginCate).then((res)=>{
+        if(res.data.state === 'success'){
+          color = '#3399ff'
+          this.loginCate ==='user' ? this.tokenVal = res.data.data : null
+          this.changeUserStore()
+        }else if(res.data.state === 'err'){
+          color = '#fe575c'
+        }
+        this.$notify({
+          message: res.data.msg,
+          duration: 2000,
+          background: color
+        })
+      })
+
       },
       changeUserStore(){
         //store
@@ -87,14 +86,14 @@
           userName: this.userName,
           password: this.password
         })
-        this.changeToken(true)
+        this.changeToken(this.tokenVal)
         this.$router.push({path:'home'})
       },
       exchangeBtnState(){
         let tipVal = ''
-        this.loginBtnState === 'login'
-          ? (this.loginBtnState = 'visitor',tipVal = '游客无需账号密码，直接登录！')
-          :(this.loginBtnState = 'login',tipVal = '需账号密码登录！')
+        this.loginCate === 'user'
+          ? (this.loginCate = 'visitor',tipVal = '游客无需账号密码，直接登录！')
+          :(this.loginCate = 'user',tipVal = '需账号密码登录！')
         if(tipVal !== ''){
           this.$toast(tipVal)
         }

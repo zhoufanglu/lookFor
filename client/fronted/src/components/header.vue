@@ -21,7 +21,7 @@
         <!--operate btn mask-->
         <van-actionsheet
                 v-model="operateInfo.show"
-                :actions="operateInfo.actions"
+                :actions="initHead"
                 @select="onSelect"
                 cancel-text="取消"
                 @cancel="onCancel"
@@ -32,16 +32,12 @@
   import {mapActions } from 'vuex';
   export default {
     name: '',
-    props:['name','isShowReturn'],
+    props:['name','isShowReturn','isShowLogout'],
     data() {
       return {
         operateInfo:{
           show: false,
-          actions: [
-            {
-              name: '注销'
-            },
-          ]
+          actions: []
         },
       }
     },
@@ -68,11 +64,23 @@
           path:'login'
         })
       },
+
       ...mapActions(['changeUserInfo','changeToken'])
     },
     components: {},
     mounted() {
-
+        //this.initHead()
+    },
+    computed:{
+      initHead(){
+        if(this.isShowLogout === 'false'){
+          return []
+        }else{
+          return [{
+            name: '注销'
+          },]
+        }
+      },
     }
   }
 </script>

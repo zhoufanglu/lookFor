@@ -1,6 +1,6 @@
 <template>
     <div class="p-register">
-        <headerContent name="注册">
+        <headerContent name="注册" isShowLogout="false">
         </headerContent>
 
         <van-cell-group>
@@ -36,7 +36,10 @@
         username:'',
         password:'',
         userErr:'',
-        pswErr:''
+        pswErr:'',
+        successMask:{
+          isShow:true
+        }
       }
     },
     methods: {
@@ -58,18 +61,30 @@
           this.pswErr = ''
         }
 
-        this.$api.user.register(this.username).then(res=>{
+        this.$api.user.register(this.username,this.password).then(res=>{
           if(res.data.state === 'err' ){
             this.userErr = res.data.msg
           }else if(res.data.state === 'success'){
             this.userErr = ''
+            //弹窗提示
             this.$notify({
               message: res.data.msg,
               duration: 2000,
               background: '#3399ff'
             })
+            //选择是直接登录还是手动登录
+            //弹窗
+            this.$Dialog.confirm({
+              title: '信息提示',
+              message: '注册成功！需要直接登录吗？'
+            }).then(() => {
+              this.$router.push({path:'home'})
+            }).catch(() => {
+              this.$router.push({path:'login'})
+            });
           }
         })
+
 
       }
     },
@@ -77,6 +92,8 @@
       headerContent
     },
     mounted() {
+
+
     }
   }
 </script>

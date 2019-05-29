@@ -10,7 +10,7 @@ const vuexLocal = new VuexPersistence({
 
 export default new Vuex.Store({
   state: {
-    token:false,
+    token:null,
     userInfo:{
       isLogin: false,
       userName: '',

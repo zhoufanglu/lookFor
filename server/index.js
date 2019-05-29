@@ -1,8 +1,14 @@
 const express = require('express')//框架
 const bodyParser = require('body-parser')//解析post参数
 const cors = require('cors')//解决跨域
+//token
+const jwt = require('jsonwebtoken')//引入jwt
+
 //import sqlFn from './mysql/select'
 import query from './mysql/config'//数据库封装
+
+import checkApiToken from './plugin/check_api_token'
+
 
 //引入userSQL语句
 import userSQL from './mysql/sql/userSQL'
@@ -22,16 +28,49 @@ app.listen(8001,()=>{
   console.log('服务启动')
 })
 
-let login = true
+let loginState = 'user'
+
 //拦截器
 app.all('*',(req,res,next)=>{
   res.header("Access-Control-Allow-Origin", "*");//允许所有跨域请求
-  if(!login){
-    return res.json('未登录')
-  }else{
-    next() //向下执行
-  }
+  next() //向下执行
+  /*if(req.method=="OPTIONS") res.send(200);/!*让options请求快速返回*!/
+  else  next();*/
 })
+
+/**
+ * 登录
+ * @type {boolean}
+ */
+app.post('/login', async (req, res) => {
+  loginState = req.body.loginState
+  let sendItem = {}
+  if (req.body.loginState === 'user') {
+    const user = await query(userSQL.login(req.body.username, req.body.password))
+    if (user.length === 0) {
+      sendItem = analyticState('err', '账号密码错误！', req.body)
+    } else {
+      //创建密钥
+      const token = jwt.sign({username: req.body.username}, 'my_token', {expiresIn: '2h'})
+      sendItem = analyticState('success', '登录成功', token)
+    }
+  } else if (req.body.loginState === 'visitor') {
+    sendItem = analyticState('success', '游客登录成功', '游客')
+  }
+
+  res.json(sendItem)
+})
+
+
+app.use((req,res,next)=>{
+  if(loginState === 'user'){
+    checkApiToken(req,res,next)
+  }else{
+    next()
+  }
+  //console.log(63,req.originalUrl)
+})
+
 
 app.get('/test',(req,res)=>{
   console.log(26,res.json('test111'))
@@ -75,14 +114,6 @@ app.post('/getNowLocation',async (req,res)=>{
     data: rows
   })
 })
-//解析返回状态
-/*let analyticState =(state,msg,data)=>{
-  return {
-    state:state,
-    msg:msg,
-    data:data
-  }
-}*/
 
 /**
  * 注册
@@ -91,10 +122,13 @@ app.post('/register',async (req,res)=>{
   //console.log(79,userSQL.getUserByNickname('admin'))
   const userInfo = await query(userSQL.getUserByNickname(req.body.username))
   //先判断有没有注册过
-  console.log(50,userInfo)
+  //console.log(50,userInfo)
   let sendItem = {}
   if(userInfo.length === 0){
+    console.log(97,userSQL.insert(req.body.username,req.body.password))
+    const insertUser =  await query(userSQL.insert(req.body.username,req.body.password))
     sendItem = analyticState('success','注册成功',req.body)
+    //console.log(99,insertUser)
   }else{
     sendItem = analyticState('err','该用户名已经存在',userInfo)
   }

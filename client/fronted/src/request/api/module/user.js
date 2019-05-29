@@ -6,10 +6,14 @@ import axios from '@/request/http'; // 导入http中创建的axios实例
 import qs from 'qs'; // 根据需求是否导入qs模块
 
 const user = {
-  login(params){
+  login(username,password,loginState){
     return axios.post(
-      '/user',
-      params
+      `${base.nodeServer}/login`,
+      {
+        username:username,
+        password:password,
+        loginState:loginState
+      }
     )
   },
   getNowLocation(){
@@ -18,10 +22,13 @@ const user = {
       `${base.nodeServer}/getNowLocation`,
     )
   },
-  register(username){
+  register(username,password){
     return axios.post(
       `${base.nodeServer}/register`,
-      {username:username}
+      {
+        username:username,
+        password:password
+      }
     )
   }
 }
