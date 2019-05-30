@@ -11,18 +11,12 @@ import 'lib-flexible'
 /**
  * vant
  */
-import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,Actionsheet,Tab, Tabs,RadioGroup, Radio,Picker,Popup } from 'vant';
 
-Vue.use(Row)
-Vue.use(Col)
-Vue.use(Button)
-Vue.use(Field)
-Vue.use(Cell)
-Vue.use(CellGroup)
-Vue.use(Icon)
-Vue.use(Tag)
-Vue.use(NavBar)
-Vue.use(Actionsheet).use(Tab).use(Tabs).use(RadioGroup).use(Radio).use(Picker).use(Popup)
+import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,ActionSheet,Tab, Slider, SidebarItem,
+  Tabs,RadioGroup, Radio,Picker,Popup } from 'vant';
+
+Vue.use(Row).use(Col).use(Button).use(Field).use(CellGroup).use(Icon).use(Tag).use(NavBar).use(ActionSheet).
+use(Cell).use(Tab).use(Tabs).use(RadioGroup).use(Radio).use(Picker).use(Popup).use(Slider).use(SidebarItem)
 
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)
@@ -38,5 +32,4 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
-
 

@@ -19,7 +19,7 @@
             </van-row>
         </div>
         <!--operate btn mask-->
-        <van-actionsheet
+        <van-action-sheet
                 v-model="operateInfo.show"
                 :actions="initHead"
                 @select="onSelect"

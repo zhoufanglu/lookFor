@@ -4,7 +4,29 @@ import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 //vuex
 import store from '@/store'
-
+//vant 的引入
+/*import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,ActionSheet,Tab, Slider, SidebarItem,
+  Tabs,RadioGroup, Radio,Picker,Popup } from 'vant';
+export default {
+    [Button.name]: Button,
+    [Row.name]: Row,
+    [Col.name]: Col,
+    [Field.name]: Field,
+    [Cell.name]: Cell,
+    [CellGroup.name]: CellGroup,
+    [Icon.name]: Icon,
+    [Tag.name]: Tag,
+    [NavBar.name]: NavBar,
+    [ActionSheet.name]: ActionSheet,
+    [Tab.name]: Tab,
+    [Slider.name]: Slider,
+    [SidebarItem.name]: SidebarItem,
+    [Tabs.name]: Tabs,
+    [RadioGroup.name]: RadioGroup,
+    [Radio.name]: Radio,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup,
+}*/
 //iconfont
 import  '@/assets/iconfont/iconfont.js'
 

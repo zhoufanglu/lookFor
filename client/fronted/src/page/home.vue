@@ -8,7 +8,7 @@
                     <div slot="title" class="title">
                         <svg class="icon personal-icon" aria-hidden="true">
                             <use xlink:href="#iconicon-test14"></use>
-                        </svg>个人信息
+                        </svg>个人信息（必填）
                     </div>
                     <form-picker>
 
@@ -19,8 +19,9 @@
                         <svg class="icon personal-icon" aria-hidden="true">
                             <use xlink:href="#iconicon-test7"></use>
                         </svg>
-                        其他信息
+                        其他信息（选填）
                     </div>
+
                 </van-tab>
             </van-tabs>
         </div>
@@ -43,9 +44,10 @@
         if(this.active<=2) {
           this.active++
         }
-      }
+      },
     },
     mounted(){
+
     },
     components:{
       headerContent,
