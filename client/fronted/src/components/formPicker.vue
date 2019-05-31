@@ -18,7 +18,7 @@
                     required
             />
 
-            <van-cell>
+            <van-cell v-show="caller==='personal'">
                 <div slot="title" class="label">性别</div>
                 <div slot="" class="sex-radio">
                     <van-radio-group v-model="info.gender">
@@ -31,7 +31,7 @@
             <van-cell>
                 <div slot="title" class="label-no-require">地区</div>
                 <div slot="" class="choose-area">
-                    <span @click="show=true" :class="info.nowLocation===''?'':'darker'">{{info.nowLocation===''?'请选择地区':info.nowLocation}}</span>
+                    <span @click="spanClick" :class="pickInfo.currentItem===''?'':'darker'">{{pickInfo.currentItem===''?'点击选择地区':pickInfo.currentItem}}</span>
                 </div>
             </van-cell>
 
@@ -40,23 +40,11 @@
                 <div slot="title" class="tip">注:带<span style="color: red">*</span>为必填</div>
             </van-cell>
         </van-cell-group>
-        <!--底部地区弹窗-->
-        <van-popup v-model="show"
-                   position="bottom"
-        >
-            <van-picker
-                    show-toolbar
-                    title="地区选择"
-                    :columns="nowLocationList"
-                    @cancel="onCancel"
-                    @confirm="onConfirm"
-                    @click="pickerClick()"
-            />
-        </van-popup>
-
     </div>
 </template>
 <script>
+  import pickerAndPopup from '@c/pickerAndPopup.vue'
+  import {mapState,mapActions } from 'vuex'
   export default {
     name: '',
     data(){
@@ -68,7 +56,7 @@
           gender:'1'
         },
         nowLocationList:[],
-        show:false
+        show:true
       }
     },
     methods:{
@@ -77,25 +65,28 @@
           this.nowLocationList = res.data.data;
           for(let i=0;i<this.nowLocationList.length;i++){
             this.nowLocationList[i] = Object.assign({text:this.nowLocationList[i].name},this.nowLocationList[i])
-            //console.log(71,Object.assign({text:i.name},i))
           }
-          //console.log(70,this.nowLocationList)
         })
       },
-      onConfirm(value,index){
-        this.info.nowLocation = value.name
-        this.show=false
+      //以下是响应子组件的方法
+      spanClick(){
+        this.changePickerInfo({
+          isShow:true,
+          title:'选择地区',
+          dataList:this.nowLocationList,
+        })
       },
-      onCancel(){
-        this.show = false
-      },
-      pickerClick(){
-        console.log(93,'xx')
-      }
+      ...mapActions(['changePickerInfo'])
     },
     mounted(){
       this.getNowLocation()
       //this.loadVanList()
+    },
+    computed:{
+      ...mapState(['pickInfo',])
+    },
+    components:{
+      pickerAndPopup
     }
   }
 </script>

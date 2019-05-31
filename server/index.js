@@ -135,4 +135,17 @@ app.post('/register',async (req,res)=>{
   //若没有，注册成功
   res.json(sendItem)
 })
+/**
+ * 获取亲戚列表
+ */
 
+app.post('/getRelative',async (req,res)=>{
+  // 现在
+  const rows = await query('select * from relative_name;')
+  //res.header({"Content-Type":"application/x-www-form-urlencoded"});
+  res.json({
+    code: 200,
+    msg: '请求成功',
+    data: rows
+  })
+})

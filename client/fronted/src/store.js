@@ -17,7 +17,13 @@ export default new Vuex.Store({
       password: ''
     },
     networkSuccess: true, //是否断网
-    //countTest: 0, //测试计数
+    //pickInfo 下拉选择器组件信息
+    pickInfo:{
+      isShow:false,
+      title:'',
+      dataList:[],
+      currentItem:''
+    }
   },
   mutations: {
     //判断是否断网
@@ -35,6 +41,21 @@ export default new Vuex.Store({
     CHANGE_TOKEN(state,val){
       state.token = val
     },
+    //改变选择器组件参数
+    CHANGE_PICKERINFO(state,val){
+      if(val.isShow === false || val.isShow === true){
+        state.pickInfo.isShow = val.isShow
+      }
+      if(val.title){
+        state.pickInfo.title = val.title
+      }
+      if(val.dataList){
+        state.pickInfo.dataList = val.dataList
+      }
+      if(val.currentItem || val.currentItem ===''){
+        state.pickInfo.currentItem = val.currentItem
+      }
+    }
   },
   actions: {
     changeUserInfo( { commit }, val ){
@@ -45,6 +66,9 @@ export default new Vuex.Store({
     },
     changeToken({ commit }, val){
       commit('CHANGE_TOKEN', val)
+    },
+    changePickerInfo({ commit }, val){
+      commit('CHANGE_PICKERINFO', val)
     }
   },
   plugins:[vuexLocal.plugin]

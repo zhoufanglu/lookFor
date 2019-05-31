@@ -12,11 +12,12 @@ import 'lib-flexible'
  * vant
  */
 
-import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,ActionSheet,Tab, Slider, SidebarItem,
-  Tabs,RadioGroup, Radio,Picker,Popup } from 'vant';
+import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,ActionSheet,Tab, Sidebar, SidebarItem,
+  Tabs,RadioGroup, Radio,Picker,Popup,Dialog  } from 'vant';
 
 Vue.use(Row).use(Col).use(Button).use(Field).use(CellGroup).use(Icon).use(Tag).use(NavBar).use(ActionSheet).
-use(Cell).use(Tab).use(Tabs).use(RadioGroup).use(Radio).use(Picker).use(Popup).use(Slider).use(SidebarItem)
+use(Cell).use(Tab).use(Tabs).use(RadioGroup).use(Radio).use(Picker).use(Popup).use(Sidebar).use(SidebarItem)
+  .use(Dialog)
 
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)
