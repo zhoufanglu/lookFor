@@ -11,6 +11,7 @@
                         </svg>个人信息（必填）
                     </div>
                     <form-picker class="form-picker"
+                                 :active="active"
                     >
 
                     </form-picker>
@@ -45,7 +46,7 @@
                         <div class="right">
                             <form-picker class="form-picker"
                                          v-if="outCurrentRelative!==''"
-                                         caller="relative"
+                                         :active="active"
                             >
 
                             </form-picker>
@@ -77,6 +78,10 @@
         >
 
         </picker-and-popup>
+        <!--时间选择器-->
+        <datePicker
+
+        ></datePicker>
     </div>
 </template>
 <script>
@@ -84,12 +89,13 @@
   import headerContent from '@c/header.vue'
   import formPicker from '@c/formPicker.vue'
   import pickerAndPopup from '@c/pickerAndPopup.vue'
+  import datePicker from '@c/datePicker.vue'
   export default {
     name: '',
     data(){
       return{
         pickShow:false,
-        active:1, //顶部的nav
+        active:0, //顶部的nav
         sidebarActiveKey:0,
         relativeMask:false,
         pickList:[],
@@ -152,7 +158,8 @@
     components:{
       headerContent,
       formPicker,
-      pickerAndPopup
+      pickerAndPopup,
+      datePicker
     }
   }
 </script>

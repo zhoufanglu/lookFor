@@ -13,11 +13,11 @@ import 'lib-flexible'
  */
 
 import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,ActionSheet,Tab, Sidebar, SidebarItem,
-  Tabs,RadioGroup, Radio,Picker,Popup,Dialog  } from 'vant';
+  Tabs,RadioGroup, Radio,Picker,Popup,Dialog,DatetimePicker } from 'vant';
 
 Vue.use(Row).use(Col).use(Button).use(Field).use(CellGroup).use(Icon).use(Tag).use(NavBar).use(ActionSheet).
 use(Cell).use(Tab).use(Tabs).use(RadioGroup).use(Radio).use(Picker).use(Popup).use(Sidebar).use(SidebarItem)
-  .use(Dialog)
+  .use(Dialog).use(DatetimePicker)
 
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)

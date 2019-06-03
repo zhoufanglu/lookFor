@@ -54,3 +54,13 @@ export function isArray(arg) {
 export function trim(str){
   return str.replace(/(^\s*)|(\s*$)/g, "");
 }
+
+//date()格式转为2019-06-03
+export function dateFormat(date){
+  let y = date.getFullYear();
+  let m = date.getMonth() + 1;
+  m = m < 10 ? '0' + m : m;
+  let d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  return y + '-' + m + '-' + d;
+}

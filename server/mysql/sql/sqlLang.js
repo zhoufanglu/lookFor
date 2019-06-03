@@ -1,7 +1,7 @@
 /**
  * 注册
  */
-const userSQL = {
+export const userSQL = {
   insert(userName,password){
     return `INSERT INTO user(userName,password) VALUES('${userName}','${password}');` // 插入数据
   },
@@ -15,4 +15,21 @@ const userSQL = {
   }
 }
 
-export default userSQL;
+export const personalSQL = {
+  insert(req){
+    return `INSERT INTO person (user_id,surname,name,sex,before_location,now_location,date_of_birth) 
+    VALUES(
+    '${req.userId}',
+    '${req.surname}',
+    '${req.name}',
+    '${req.sex}',
+    '${req.beforeLocation}',
+    '${req.nowLocation}',
+    '${req.dateOfBirth}'
+    );` // 插入数据
+  },
+  update(){
+
+  }
+}
+

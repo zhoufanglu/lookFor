@@ -11,7 +11,7 @@ import checkApiToken from './plugin/check_api_token'
 
 
 //引入userSQL语句
-import userSQL from './mysql/sql/userSQL'
+import {userSQL,personalSQL} from './mysql/sql/sqlLang'
 
 //引入公用方法插件
 import {analyticState} from './plugin/global'
@@ -50,9 +50,13 @@ app.post('/login', async (req, res) => {
     if (user.length === 0) {
       sendItem = analyticState('err', '账号密码错误！', req.body)
     } else {
+      const userInfo = await query(userSQL.getUserByNickname(req.body.username))
       //创建密钥
-      const token = jwt.sign({username: req.body.username}, 'my_token', {expiresIn: '2h'})
-      sendItem = analyticState('success', '登录成功', token)
+      const token = jwt.sign({username: req.body.username}, 'my_token'/*, {expiresIn: '2h'}*/)
+      sendItem = analyticState('success', '登录成功', {
+        token:token,
+        userInfo:userInfo[0]
+      })
     }
   } else if (req.body.loginState === 'visitor') {
     sendItem = analyticState('success', '游客登录成功', '游客')
@@ -119,7 +123,7 @@ app.post('/getNowLocation',async (req,res)=>{
  * 注册
  */
 app.post('/register',async (req,res)=>{
-  //console.log(79,userSQL.getUserByNickname('admin'))
+  //console.log(79,sqlLang.getUserByNickname('admin'))
   const userInfo = await query(userSQL.getUserByNickname(req.body.username))
   //先判断有没有注册过
   //console.log(50,userInfo)
@@ -146,6 +150,18 @@ app.post('/getRelative',async (req,res)=>{
   res.json({
     code: 200,
     msg: '请求成功',
+    data: rows
+  })
+})
+
+/**
+ * 个人信息的填写
+ */
+app.post('/addPersonalInfo',async(req,res)=>{
+  const rows = await query(personalSQL.insert(req.body))
+  res.json({
+    code: 200,
+    msg: '保存成功',
     data: rows
   })
 })

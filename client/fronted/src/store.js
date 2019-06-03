@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     token:null,
     userInfo:{
+      userId: 0,
       isLogin: false,
       userName: '',
       password: ''

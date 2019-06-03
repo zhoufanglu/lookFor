@@ -36,6 +36,18 @@ const toLogin = () => {
 }
 
 /**
+ * 注销
+ * 清空所有登录信息
+ */
+const logout = ()=>{
+  store.dispatch('changeToken', null);
+  store.dispatch('changeUserInfo',{
+    isLogin: false,
+    userName: '',
+    password: ''})
+}
+
+/**
  * 请求失败后的错误统一处理
  * @param {Number} status 请求失败的状态码
  */
@@ -44,13 +56,18 @@ const errorHandle = (status, other) => {
   switch (status) {
     // 401: 未登录状态，跳转登录页
     case 401:
-      toLogin();
+      logout()
+      toLogin()
       break;
     // 403 token过期
     // 清除token并跳转登录页
+    case 402://token 出错
+      tip('登录出错，请重新登录','red');
+      logout()
+      setTimeout(()=>{toLogin();},1000)
     case 403:
       tip('登录过期，请重新登录','red');
-      store.dispatch('changeToken', null);
+      logout()
       setTimeout(() => {
         toLogin();
       }, 1000);
@@ -59,10 +76,10 @@ const errorHandle = (status, other) => {
     case 404:
       tip('请求的资源不存在');
       break;
-    /*case 500:
-      store.commit('changeNetwork', false);
+    case 500:
+      //store.commit('changeNetwork', false);
       tip('网络异常!');
-      router.push({path:'refresh'})*/
+      //router.push({path:'refresh'})
     default:
       console.log('其它错误',other);
   }}
@@ -112,9 +129,9 @@ instance.interceptors.response.use(
       // eg:请求超时或断网时，更新state的network状态
       // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
       // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
-      store.dispatch('changeNetwork', false);
+      //store.dispatch('changeNetwork', false);
       tip('网络异常!','red');
-      router.push({path:'refresh'})
+      //router.push({path:'refresh'})
     }
   });
 

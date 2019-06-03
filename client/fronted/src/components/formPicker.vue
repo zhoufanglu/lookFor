@@ -18,15 +18,24 @@
                     required
             />
 
-            <van-cell v-show="caller==='personal'">
+            <van-cell>
                 <div slot="title" class="label">性别</div>
                 <div slot="" class="sex-radio">
-                    <van-radio-group v-model="info.gender">
-                        <van-radio name="1">男</van-radio>
-                        <van-radio name="2">女</van-radio>
+                    <van-radio-group v-model="info.sex">
+                        <van-radio name="男">男</van-radio>
+                        <van-radio name="女">女</van-radio>
                     </van-radio-group>
                 </div>
             </van-cell>
+
+            <van-cell>
+                <div slot="title" class="label-no-require">诞生日</div>
+                <span @click="dateClick"
+                      :class="info.dateOfBirth===''?'':'darker'"
+                      class="date-picker-span"
+                >{{info.dateOfBirth===''?'点击选择出生日期':info.dateOfBirth}}</span>
+            </van-cell>
+
 
             <van-cell>
                 <div slot="title" class="label-no-require">地区</div>
@@ -39,24 +48,46 @@
             <van-cell>
                 <div slot="title" class="tip">注:带<span style="color: red">*</span>为必填</div>
             </van-cell>
+            <van-cell class="save-cell">
+                <van-button
+                        type="default"
+                        :loading="btnLoading"
+                        @click="saveInfo"
+                >保存信息</van-button>
+            </van-cell>
         </van-cell-group>
+
     </div>
 </template>
 <script>
-  import pickerAndPopup from '@c/pickerAndPopup.vue'
   import {mapState,mapActions } from 'vuex'
+  import datePicker from '@c/datePicker.vue'
+  import eventBus from '@/assets/js/utils/eventBus.js'
+  import { dateFormat } from '@/assets/js/utils/validate.js'
+  import { personal} from '@/request/api/module/personal.js'
+
   export default {
     name: '',
+    props:['active'],
     data(){
       return{
         info:{
           surname:'',
           name:'',
           nowLocation:'',
-          gender:'1'
+          beforeLocation:'',
+          sex:'男',
+          dateOfBirth:'',
+          userId: '',
         },
         nowLocationList:[],
-        show:true
+        show:true,
+        btnLoading:false,
+        datePick:{
+          minDate: new Date('1900-01-01'),
+          maxDate: new Date(),
+          isShow:true
+        },
       }
     },
     methods:{
@@ -76,17 +107,62 @@
           dataList:this.nowLocationList,
         })
       },
+      saveInfo(){
+        let flag = false
+        if(String(this.active) === '0'){
+          flag = this.valiDate('0')
+        }else if(String(this.active) === '1'){
+
+        }
+        if(flag){ //保存
+          this.btnLoading = true
+          console.log(117,this.info)
+          this.$api.personal.addPersonalInfo(
+            this.info
+          ).then(res=>{
+            this.btnLoading = false
+            this.$notify({
+              message: res.data.msg,
+              duration: 2000,
+              background: '#3399ff'
+            })
+            console.log(120,res)
+          })
+        }
+      },
+      valiDate(cate){
+        if(cate === '0'){
+            if(this.info.surname ===''||this.info.name===''){
+              this.$tip.fail('带*号的为必填！')
+              return false
+            }else{
+              return true
+            }
+        }else if(cate === '1'){
+
+        }
+      },
+      initParams(){
+        eventBus.$on('setDate',(date)=>{
+          this.info.birthOfData = date
+        })
+        this.info.userId = this.userInfo.userId
+      },
+      dateClick(){
+        eventBus.$emit('openDatePicker',true)
+      },
       ...mapActions(['changePickerInfo'])
     },
     mounted(){
       this.getNowLocation()
+      this.initParams()
       //this.loadVanList()
     },
     computed:{
-      ...mapState(['pickInfo',])
+      ...mapState(['pickInfo','userInfo'])
     },
     components:{
-      pickerAndPopup
+      datePicker
     }
   }
 </script>
@@ -123,6 +199,22 @@
         }
         .darker{
             color: $darker;
+        }
+        .save-cell{
+            @include vertical-center;
+            >div{
+                @include vertical-center;
+                .van-button--default{
+                    width: 100px;
+                    /*background-color: $theme2!important;
+                    color: white;
+                    font-weight: bolder;*/
+                }
+            }
+        }
+        .date-picker-span{
+            width: 100%;
+            display: flex;
         }
     }
 </style>

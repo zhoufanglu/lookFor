@@ -66,8 +66,8 @@
       this.$api.user.login(this.userName,this.password,this.loginCate).then((res)=>{
         if(res.data.state === 'success'){
           color = '#3399ff'
-          this.loginCate ==='user' ? this.tokenVal = res.data.data : null
-          this.changeUserStore()
+          this.loginCate ==='user' ? this.tokenVal = res.data.data.token : null
+          this.changeUserStore(res.data.data.userInfo)
         }else if(res.data.state === 'err'){
           color = '#fe575c'
         }
@@ -79,12 +79,13 @@
       })
 
       },
-      changeUserStore(){
+      changeUserStore(userInfo){
         //store
         this.changeUserInfo({
           isLogin: true,
           userName: this.userName,
-          password: this.password
+          password: this.password,
+          userId: userInfo.id
         })
         this.changeToken(this.tokenVal)
         this.$router.push({path:'home'})
