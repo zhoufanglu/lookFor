@@ -155,6 +155,20 @@ app.post('/getRelative',async (req,res)=>{
 })
 
 /**
+ * 根据user_id 查找个人信息
+ */
+app.post('/personal/search',async (req,res)=>{
+  //console.log(162,req.body)
+  const rows = await query(personalSQL.search(req.body.userId))
+  //res.header({"Content-Type":"application/x-www-form-urlencoded"});
+  res.json({
+    code: 200,
+    msg: '加载成功',
+    data: rows
+  })
+})
+
+/**
  * 个人信息的填写
  */
 app.post('/addPersonalInfo',async(req,res)=>{

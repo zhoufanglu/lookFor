@@ -1,5 +1,5 @@
 /**
- * 注册
+ * 用户注册
  */
 export const userSQL = {
   insert(userName,password){
@@ -15,6 +15,10 @@ export const userSQL = {
   }
 }
 
+/**
+ *
+ * 个人信息
+ */
 export const personalSQL = {
   insert(req){
     return `INSERT INTO person (user_id,surname,name,sex,before_location,now_location,date_of_birth) 
@@ -27,6 +31,9 @@ export const personalSQL = {
     '${req.nowLocation}',
     '${req.dateOfBirth}'
     );` // 插入数据
+  },
+  search(userId){
+    return `SELECT * FROM person WHERE user_id=${userId};`
   },
   update(){
 

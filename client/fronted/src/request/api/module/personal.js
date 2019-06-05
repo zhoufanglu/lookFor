@@ -21,5 +21,23 @@ const personal = {
       }
     )
   },
+  searchPersonalInfo(userId){
+    /*return axios.post(
+      `${base.nodeServer}/personal/search`,
+      {
+        userId:userId,
+      }
+    )*/
+    return new Promise((resolve, reject) => {
+      axios.post(`${base.nodeServer}/personal/search`, {
+        userId:userId,
+      }).then((res) => {
+        resolve(res)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
+  },
+
 }
 export default personal

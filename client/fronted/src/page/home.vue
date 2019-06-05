@@ -12,6 +12,7 @@
                     </div>
                     <form-picker class="form-picker"
                                  :active="active"
+                                 :personal="personal"
                     >
 
                     </form-picker>
@@ -90,6 +91,7 @@
   import formPicker from '@c/formPicker.vue'
   import pickerAndPopup from '@c/pickerAndPopup.vue'
   import datePicker from '@c/datePicker.vue'
+  import personal from "../request/api/module/personal";
   export default {
     name: '',
     data(){
@@ -101,7 +103,11 @@
         pickList:[],
         pickerTitle:'',
         outCurrentRelative:'',//nav的选中
-        rightNavList:[] //左侧的亲戚列表
+        rightNavList:[], //左侧的亲戚列表
+        personal:{
+          state:'',//判断是修改状态，还是新增状态  add/edit
+          data:[]
+        },
       }
     },
     methods:{
@@ -147,13 +153,42 @@
           currentItem:''
         })
       },
+      initParams(){
+        //如果不是游客登录，查看有没有填过信息
+        this.$api.personal.searchPersonalInfo(this.userInfo.userId).then((res)=>{
+          /*this.personal = {
+            data: res.data.data,
+            state: 'edit'
+          }*/
+          //this.personal.data = [1,2,3]
+          // this.personal = 1
+          if(res.data.data.length === 0){
+            // this.personal.state = 'add'; // 不知道什么原因 只能修改整个对象了
+            //this.$set(this.personal, 'state', 'add')
+            this.personal = {
+              data: res.data.data,
+              state: 'add'
+            }
+          }else{
+             this.personal.state = 'edit'
+            //this.$set(this.personal, 'state', 'edit')
+            this.personal = {
+              data: res.data.data,
+              state: 'edit'
+            }
+          }
+
+        })
+
+      },
       ...mapActions(['changePickerInfo'])
     },
     mounted(){
-      //this.getRelative()
+
+      this.initParams()
     },
     computed:{
-      ...mapState(['pickInfo',])
+      ...mapState(['pickInfo','userInfo'])
     },
     components:{
       headerContent,

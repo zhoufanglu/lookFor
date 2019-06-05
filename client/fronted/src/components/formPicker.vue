@@ -53,10 +53,9 @@
                         type="default"
                         :loading="btnLoading"
                         @click="saveInfo"
-                >保存信息</van-button>
+                >{{personal.state==='edit'?'修改信息':'保存信息'}}</van-button>
             </van-cell>
         </van-cell-group>
-
     </div>
 </template>
 <script>
@@ -68,7 +67,7 @@
 
   export default {
     name: '',
-    props:['active'],
+    props:['active','personal',],
     data(){
       return{
         info:{
@@ -117,6 +116,7 @@
         if(flag){ //保存
           this.btnLoading = true
           console.log(117,this.info)
+          this.info.nowLocation = this.pickInfo.currentItem
           this.$api.personal.addPersonalInfo(
             this.info
           ).then(res=>{
@@ -144,9 +144,20 @@
       },
       initParams(){
         eventBus.$on('setDate',(date)=>{
-          this.info.birthOfData = date
+          this.info.dateOfBirth = date
         })
         this.info.userId = this.userInfo.userId
+        //init personal
+        console.log(149,this.personal)
+        console.log(150,this.personal.state)
+        /*if (this.personal.data.length !== 0) {
+          console.log(this.personal.data[0])
+          this.info.surname = this.personal.data[0].surname
+          this.info.name = this.personal.data[0].name
+          this.info.sex = this.personal.data[0].sex
+          this.info.nowLocation = this.personal.data[0].now_location
+          this.info.dateOfBirth = this.personal.data[0].date_of_birth
+        }*/
       },
       dateClick(){
         eventBus.$emit('openDatePicker',true)
@@ -163,6 +174,14 @@
     },
     components:{
       datePicker
+    },
+    watch:{
+      personal(newValue,oldValue){
+        console.log(181,newValue) // 这里拿不到吗？拿不到 打开试试
+      },
+      [`personal.state`]:function(newValue){
+        console.log(183,newValue)
+      }
     }
   }
 </script>
