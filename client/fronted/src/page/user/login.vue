@@ -85,7 +85,7 @@
           isLogin: true,
           userName: this.userName,
           password: this.password,
-          userId: userInfo.id
+          userId: this.userName !=='游客'?userInfo.id:-1
         })
         this.changeToken(this.tokenVal)
         this.$router.push({path:'home'})
@@ -93,7 +93,7 @@
       exchangeBtnState(){
         let tipVal = ''
         this.loginCate === 'user'
-          ? (this.loginCate = 'visitor',tipVal = '游客无需账号密码，直接登录！')
+          ? (this.loginCate = 'visitor',tipVal = '游客无需账号密码，直接登录！但信息不会保存！')
           :(this.loginCate = 'user',tipVal = '需账号密码登录！')
         if(tipVal !== ''){
           this.$toast(tipVal)

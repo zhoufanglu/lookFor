@@ -106,6 +106,10 @@
           dataList:this.nowLocationList,
         })
       },
+      /**
+       * active:0  个人信息
+       * active:1  其它信息
+       */
       saveInfo(){
         let flag = false
         if(String(this.active) === '0'){
@@ -113,6 +117,8 @@
         }else if(String(this.active) === '1'){
 
         }
+        console.log(116,this.active,this.personal.state)
+        return false;
         if(flag){ //保存
           this.btnLoading = true
           console.log(117,this.info)
@@ -148,16 +154,6 @@
         })
         this.info.userId = this.userInfo.userId
         //init personal
-        console.log(149,this.personal)
-        console.log(150,this.personal.state)
-        /*if (this.personal.data.length !== 0) {
-          console.log(this.personal.data[0])
-          this.info.surname = this.personal.data[0].surname
-          this.info.name = this.personal.data[0].name
-          this.info.sex = this.personal.data[0].sex
-          this.info.nowLocation = this.personal.data[0].now_location
-          this.info.dateOfBirth = this.personal.data[0].date_of_birth
-        }*/
       },
       dateClick(){
         eventBus.$emit('openDatePicker',true)
@@ -177,11 +173,21 @@
     },
     watch:{
       personal(newValue,oldValue){
-        console.log(181,newValue) // 这里拿不到吗？拿不到 打开试试
+        console.log(181,newValue)
+        if (newValue.data.length !== 0) {
+          this.info.surname = newValue.data[0].surname
+          this.info.name = newValue.data[0].name
+          this.info.sex = newValue.data[0].sex
+          //地区存在store里面
+          this.info.nowLocation = newValue.data[0].now_location
+          this.pickInfo.currentItem = newValue.data[0].now_location
+
+          this.info.dateOfBirth = newValue.data[0].date_of_birth
+        }
       },
-      [`personal.state`]:function(newValue){
+      /*[`personal.state`]:function(newValue){
         console.log(183,newValue)
-      }
+      }*/
     }
   }
 </script>

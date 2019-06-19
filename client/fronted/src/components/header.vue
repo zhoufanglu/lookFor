@@ -10,6 +10,7 @@
                 </van-col>
                 <van-col span="20" class="title">
                     {{name}}
+                    <span class="username">({{userInfo.userName}})</span>
                 </van-col>
                 <van-col span="2">
                     <svg class="icon return-icon" aria-hidden="true" @click="onClickRight">
@@ -29,7 +30,7 @@
     </div>
 </template>
 <script>
-  import {mapActions } from 'vuex';
+  import {mapActions,mapState} from 'vuex';
   export default {
     name: '',
     props:['name','isShowReturn','isShowLogout'],
@@ -81,6 +82,7 @@
           },]
         }
       },
+      ...mapState(['userInfo'])
     }
   }
 </script>
@@ -94,6 +96,11 @@
                     margin-right: 6px;
                 }
                 @include vertical-center;
+                .username{
+                    color: $dark;
+                    font-size: 14px;
+                    margin-left: 6px;
+                }
             }
         }
     }

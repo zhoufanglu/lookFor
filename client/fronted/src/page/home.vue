@@ -48,6 +48,7 @@
                             <form-picker class="form-picker"
                                          v-if="outCurrentRelative!==''"
                                          :active="active"
+                                         :personal="personal"
                             >
 
                             </form-picker>
@@ -116,6 +117,7 @@
       },
       //显示亲戚列表
       relativeSpanClick(){
+        //console.log(119,this.personal.state)
         this.getRelative()
         this.changePickerInfo({
           isShow:true,
@@ -152,6 +154,7 @@
           isShow:false,
           currentItem:''
         })
+        //console.log(157,index)
       },
       initParams(){
         //如果不是游客登录，查看有没有填过信息
