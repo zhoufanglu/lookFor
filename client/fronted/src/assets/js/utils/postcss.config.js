@@ -1,23 +1,17 @@
 const autoprefixer = require('autoprefixer')
 const pxtorem = require('postcss-pxtorem')
 
-module.exports = ({ file }) => {
-  console.log(5,file)
-  let rootValue
-  // vant 37.5 https://github.com/youzan/vant/issues/1181
-  if (file && file.dirname && file.dirname.indexOf('vant') > -1) {
-    rootValue = 37.5
-  } else {
-    rootValue = 75
-  }
-  return {
-    plugins: [
-      autoprefixer(),
-      pxtorem({
-        rootValue: rootValue,
-        propList: ['*'],
-        minPixelValue: 2
-      })
-    ]
-  }
-}
+module.exports =
+	{
+		plugins: {
+			autoprefixer: { // 添加浏览器前缀
+				browsers: ["Android >= 4.0", "iOS >= 7"]    },
+			"postcss-pxtorem": {
+				rootValue: 75, //结果为：设计稿元素尺寸/75，设计稿宽 750,最终页面会换算成 10rem
+				// unitPrecision: 5, // 允许REM单位增长的十进制数
+				propList: ["*"],
+				// selectorBlackList: [""], //（数组）要忽略的选择器并保留为px。
+				minPixelValue: 2 // （数字）设置要替换的最小像素值 解决 1px 问题
+			}
+		}
+	};

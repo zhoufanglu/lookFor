@@ -7,11 +7,8 @@ module.exports = {
     : '/',
   // 输出文件目录
   outputDir: 'dist',
-  // eslint-loader 是否在保存的时候检查
+
   lintOnSave: false,
-  // webpack配置
-  // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  chainWebpack: () => {},
   configureWebpack: (config) => {
     if (process.env.NODE_ENV === 'production') {
       // 为生产环境修改配置...
@@ -41,29 +38,16 @@ module.exports = {
     sourceMap: false,
     // css预设器配置项
     loaderOptions: {
-      postcss: {
-        plugins: [
-          require('autoprefixer')({
-            browsers: ['Android >= 4.0', 'iOS >= 7']
-          }),
-          require('postcss-px2rem')({ //配置项，详见官方文档
-            remUnit: 37.5
-          }), // 换算的基数
-        ]
-      },
-      sass: { //全局scss
-        data: `@import "@/assets/scss/entrance.scss";`
-      }
+      /*sass: { //全局scss
+	      prependData: `@import "~@/assets/scss/entrance.scss";`
+      }*/
     },
     // 启用 CSS modules for all css / pre-processor files.
-    modules: false
+	  //requireModuleExtension: false
   },
   // use thread-loader for babel & TS in production build
   // enabled by default if the machine has more than 1 cores
   parallel: require('os').cpus().length > 1,
-  // PWA 插件相关配置
-  // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
-  pwa: {},
   // webpack-dev-server 相关配置
   devServer: {
     open: process.platform === 'darwin',
@@ -89,6 +73,11 @@ module.exports = {
   },
   // 第三方插件配置
   pluginOptions: {
-    // ...
+    'style-resources-loader': {
+      preProcessor: 'scss',
+      patterns: [
+	      path.resolve(__dirname, 'src/assets/scss/entrance.scss'),
+      ]
+    }
   }
 };
