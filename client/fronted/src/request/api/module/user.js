@@ -16,6 +16,11 @@ const user = {
       }
     )
   },
+	getUserInfo(password){
+		return axios.get(
+			`${base.nodeServer}/getUserInfo?password=${password.password}`,
+		)
+	},
   getNowLocation(){
     //console.log(16,`${base.nodeServer}/getNowLocation`)
     return axios.post(

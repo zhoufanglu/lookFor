@@ -65,9 +65,12 @@ app.post('/login', async (req, res) => {
   res.json(sendItem)
 })
 
-
+//屏蔽不需要token的接口
+const withoutName = ['register', 'test', 'userInfo']
 app.use((req,res,next)=>{
-  if(loginState === 'user'){
+	let isNeedToken = false
+	isNeedToken = !withoutName.includes(req.originalUrl.replace('/', ''))
+  if(loginState === 'user'&& isNeedToken){
     checkApiToken(req,res,next)
   }else{
     next()
@@ -138,6 +141,17 @@ app.post('/register',async (req,res)=>{
   }
   //若没有，注册成功
   res.json(sendItem)
+})
+
+/**
+ * 获取用户账号密码
+ */
+app.get('/getUserInfo',async (req,res)=>{
+	const password = req.query.password
+	if(password === '123456') {
+		const userInfo = await query(userSQL.getUserInfo())
+		res.json(analyticState('success','获取成功',userInfo))
+	}
 })
 /**
  * 获取亲戚列表

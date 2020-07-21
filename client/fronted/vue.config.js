@@ -59,7 +59,7 @@ module.exports = {
         // 设置代理
         // proxy all requests starting with /api to jsonplaceholder
         '/api': {
-            target: '172.16.21.8:8001', //设置你调用的接口域名和端口号
+            target: '127.0.0.1:8001', //设置你调用的接口域名和端口号
             changeOrigin: true,
             pathRewrite: {
                 '^/api': '/'//这里理解成用‘/api’代替target里面的地址，

@@ -10,6 +10,7 @@ const home = ()=> import('@/page/home.vue')
 const test = ()=> import('@/page/test/test.vue')
 const login = ()=>import('@/page/user/login.vue')
 const register = ()=>import('@/page/user/register.vue')
+const userInfo = ()=> import('@/page/user/userInfo.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
 
@@ -57,6 +58,11 @@ export default new Router({
       path:'/register',
       name:'register',
       component: register
-    }
+    },
+	  {
+		  path:'/userInfo',
+		  name:'userInfo',
+		  component: userInfo
+	  },
   ]
 })

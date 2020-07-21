@@ -1,7 +1,7 @@
 let jwt = require('jsonwebtoken');
 // 检查用户会话
 export default function(req, res, next) {
-  console.log('检查post的信息或者url查询参数或者头信息');
+  //console.log('检查post的信息或者url查询参数或者头信息');
   //检查post的信息或者url查询参数或者头信息
   let token = req.body.token || req.query.token || req.headers['authorization'];
   //console.log(7,token)

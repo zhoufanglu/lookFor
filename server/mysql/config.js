@@ -1,9 +1,9 @@
 const mysql = require('mysql');
 const option = {
-  host: 'localhost',
-  user: 'root',
-  password: 'l568767199',
-  database: 'lookfor',
+  host: '119.45.53.85',
+  user: 'lookFor',
+  password: 'w87dRTxBzSpwrEBA',
+  database: 'lookFor',
 }
 
 //创建连接池

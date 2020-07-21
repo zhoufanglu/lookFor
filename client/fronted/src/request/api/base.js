@@ -5,7 +5,7 @@ const base = {
   sq: 'https://xxxx111111.com/api/v1',
   bd: 'http://xxxxx22222.com/api',
   taobao:'https://suggest.taobao.com',
-  nodeServer:'http://172.16.21.8:8001',
+  nodeServer:'http://127.0.0.1:8001',
   api: '/api' //本地服务开发利用proxy内的代理访问
 }
 
