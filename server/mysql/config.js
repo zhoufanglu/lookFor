@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const option = {
   host: '119.45.53.85',
   user: 'lookFor',
-  password: 'w87dRTxBzSpwrEBA',
+  password: 'bpnBsPcLD5ZsXCac',
   database: 'lookFor',
 }
 

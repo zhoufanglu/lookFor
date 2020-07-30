@@ -2,9 +2,10 @@ const path = require('path');
 
 module.exports = {
   // 基本路径
-  publicPath: process.env.NODE_ENV === 'production'
+  /*publicPath: process.env.NODE_ENV === 'production'
     ? '/production-sub-path/'
-    : '/',
+    : '/',*/
+  publicPath: process.env.NODE_ENV === 'production'? './lookFor':'',
   // 输出文件目录
   outputDir: 'dist',
 
@@ -59,7 +60,7 @@ module.exports = {
         // 设置代理
         // proxy all requests starting with /api to jsonplaceholder
         '/api': {
-            target: '127.0.0.1:8001', //设置你调用的接口域名和端口号
+            target: '127.0.0.1:8002', //设置你调用的接口域名和端口号
             changeOrigin: true,
             pathRewrite: {
                 '^/api': '/'//这里理解成用‘/api’代替target里面的地址，

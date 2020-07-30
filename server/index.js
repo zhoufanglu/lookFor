@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.use(cors()) //解决跨域
 
-app.listen(8001,()=>{
+app.listen(8002,()=>{
   console.log('服务启动')
 })
 
@@ -66,10 +66,14 @@ app.post('/login', async (req, res) => {
 })
 
 //屏蔽不需要token的接口
-const withoutName = ['register', 'test', 'userInfo']
+const withoutName = ['register', 'test', 'getUserInfo']
 app.use((req,res,next)=>{
 	let isNeedToken = false
-	isNeedToken = !withoutName.includes(req.originalUrl.replace('/', ''))
+  const index = withoutName.findIndex(i=>{
+    return (req.originalUrl).includes(i)
+  })
+  isNeedToken = !index === -1
+  //console.log(76, isNeedToken)
   if(loginState === 'user'&& isNeedToken){
     checkApiToken(req,res,next)
   }else{

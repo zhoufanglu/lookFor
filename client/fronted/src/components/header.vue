@@ -10,7 +10,7 @@
                 </van-col>
                 <van-col span="20" class="title">
                     {{name}}
-                    <span class="username">({{userInfo.userName}})</span>
+                    <span class="username" v-if="userInfo.userName">({{userInfo.userName}})</span>
                 </van-col>
                 <van-col span="2">
                     <svg class="icon return-icon" aria-hidden="true" @click="onClickRight">

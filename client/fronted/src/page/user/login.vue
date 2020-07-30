@@ -40,6 +40,11 @@
                     <span @click="goRegister">没有账号？点击注册</span>
                 </van-col>
             </van-row>
+            <van-row class="p-go-user">
+              <van-col>
+                <router-link to="/userInfo">查看用户</router-link>
+              </van-col>
+            </van-row>
         </div>
     </div>
 </template>
@@ -154,5 +159,8 @@
             margin-left: -16px;
             white-space: nowrap;
         }
+      .p-go-user{
+        margin-top: 20px!important;
+      }
     }
 </style>
