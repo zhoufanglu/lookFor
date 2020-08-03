@@ -13,6 +13,11 @@ const register = ()=>import('@/page/user/register.vue')
 const userInfo = ()=> import('@/page/user/userInfo.vue')
 //special
 const refresh = ()=> import('@/page/special/refresh.vue')
+//tool
+const tool = ()=> import('@/page/tool/tool.vue')
+const imgShow = ()=> import('@/page/tool/children/imgShow.vue')
+const imgUpload = ()=> import('@/page/tool/children/imgUpload.vue')
+
 
 
 export default new Router({
@@ -67,5 +72,32 @@ export default new Router({
         requiresAuth:false,
       },
 	  },
+    {
+      path:'/tool',
+      redirect: '/tool/imgShow',
+      name:'tool',
+      component: tool,
+      meta:{
+        requiresAuth:false,
+      },
+      children: [
+        {
+          path:'/tool/imgShow',
+          name:'imgShow',
+          component: imgShow,
+          meta:{
+            ZHName: '图片展示',
+          },
+        },
+        {
+          path:'/tool/imgUpload',
+          name:'imgUpload',
+          component: imgUpload,
+          meta:{
+            ZHName: '图片上传',
+          },
+        },
+      ]
+    },
   ]
 })
