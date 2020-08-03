@@ -18,8 +18,7 @@
   </div>
 </template>
 <script>
-  import instance from "../../../request/http";
-
+ 
   export default {
     name: '',
     components: {  },
@@ -60,7 +59,11 @@
         })
       },
       upload() {
-
+        this.$api.files.uploadImg(
+          {fileList: 'fileTest'}
+        )
+        .then(res=>{
+        })
       }
       //一般方法
       /*imgFileChange(e) {
