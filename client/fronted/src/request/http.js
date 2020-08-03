@@ -1,4 +1,4 @@
-import { Notify } from 'vant';
+import {Notify} from 'vant';
 /**
  * axios封装
  * 请求拦截、响应拦截、错误统一处理
@@ -13,12 +13,34 @@ import store from '@/store';
  * @param msg  提示信息
  * @param color 背景颜色
  */
-const tip = (msg,color='#1989fa') =>{
+const tip = (msg, color = '#1989fa') => {
   Notify({
     message: msg,
     duration: 2000,
     background: color
   });
+}
+/**********************头部配置***********************/
+const headerConfig = {
+  json: {
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+      'X-Requested-With': 'XMLHttpRequest',
+    },
+  },
+  form: {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  },
+  file: {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+    },
+  },
+  excel: {
+    responseType: 'arraybuffer',
+  },
 }
 
 /**
@@ -39,12 +61,13 @@ const toLogin = () => {
  * 注销
  * 清空所有登录信息
  */
-const logout = ()=>{
+const logout = () => {
   store.dispatch('changeToken', null);
-  store.dispatch('changeUserInfo',{
+  store.dispatch('changeUserInfo', {
     isLogin: false,
     userName: '',
-    password: ''})
+    password: ''
+  })
 }
 
 /**
@@ -62,11 +85,13 @@ const errorHandle = (status, other) => {
     // 403 token过期
     // 清除token并跳转登录页
     case 402://token 出错
-      tip('登录出错，请重新登录','red');
+      tip('登录出错，请重新登录', 'red');
       logout()
-      setTimeout(()=>{toLogin();},1000)
+      setTimeout(() => {
+        toLogin();
+      }, 1000)
     case 403:
-      tip('登录过期，请重新登录','red');
+      tip('登录过期，请重新登录', 'red');
       logout()
       setTimeout(() => {
         toLogin();
@@ -79,21 +104,30 @@ const errorHandle = (status, other) => {
     case 500:
       //store.commit('changeNetwork', false);
       tip('网络异常!');
-      //router.push({path:'refresh'})
+    //router.push({path:'refresh'})
     default:
-      console.log('其它错误',other);
-  }}
+      console.log('其它错误', other);
+  }
+}
 
 const instance = axios.create({
   timeout: 10000,
 })
 // 设置post请求头
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+//instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 /**
  * 请求拦截器
  * 每次请求前，如果存在token则在请求头中携带token
  */
 instance.interceptors.request.use(config => {
+    //post请求时，判断头部是什么
+    if(config.method === 'post') {
+      if(config.data&&config.data.headers) {
+        config.headers = headerConfig[config.data.headers].headers
+        delete config.data.headers
+      }
+    }
+    console.log(130, config)
     // 登录流程控制中，根据本地是否存在token判断用户的登录情况
     // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
     // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码
@@ -108,18 +142,18 @@ instance.interceptors.request.use(config => {
 instance.interceptors.response.use(
   // 请求成功
   res => {
-      if(res.status === 200){
-        store.dispatch('changeNetwork', true)
-        return Promise.resolve(res)
-      }else {
-        return Promise.reject(res)
-      }
+    if (res.status === 200) {
+      store.dispatch('changeNetwork', true)
+      return Promise.resolve(res)
+    } else {
+      return Promise.reject(res)
+    }
   },
   // 请求失败
 
   error => {
-    const { response } = error;
-    console.log(94,response)
+    const {response} = error;
+    console.log(94, response)
     if (response) {
       // 请求已发出，但是不在2xx的范围
       errorHandle(response.status, response.data.message);
@@ -130,7 +164,7 @@ instance.interceptors.response.use(
       // network状态在app.vue中控制着一个全局的断网提示组件的显示隐藏
       // 关于断网组件中的刷新重新获取数据，会在断网组件中说明
       //store.dispatch('changeNetwork', false);
-      tip('网络异常!','red');
+      tip('网络异常!', 'red');
       //router.push({path:'refresh'})
     }
   });

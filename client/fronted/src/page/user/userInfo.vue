@@ -31,6 +31,11 @@
           console.log(14, res.data.data)
           this.users = res.data.data
         })
+      /*this.$api.user.getUserInfoPost({password: 123456})
+        .then(res => {
+          console.log(14, res.data.data)
+          this.users = res.data.data
+        })*/
     },
     mounted() {
     },

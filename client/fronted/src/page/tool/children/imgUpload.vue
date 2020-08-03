@@ -13,6 +13,8 @@
         <img :src="i" alt="">
       </li>
     </ul>
+    <van-button type="info" @click="upload">上传</van-button>
+    <span>状态：{{uploadState}}</span>
   </div>
 </template>
 <script>
@@ -24,7 +26,8 @@
     data() {
       return {
         fileList: [],
-        pathList: []
+        pathList: [],
+        uploadState: '未上传'
       }
     },
     created() {
@@ -55,6 +58,9 @@
             reject(reader.error)
           })*/
         })
+      },
+      upload() {
+
       }
       //一般方法
       /*imgFileChange(e) {
