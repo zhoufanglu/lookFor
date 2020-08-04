@@ -6,6 +6,7 @@ import {Notify} from 'vant';
 import axios from 'axios';
 import router from '../router';
 import store from '@/store';
+import qs from 'qs'
 //import { Toast } from 'vant';
 
 /**
@@ -120,13 +121,14 @@ const instance = axios.create({
  * 每次请求前，如果存在token则在请求头中携带token
  */
 instance.interceptors.request.use(config => {
+    console.log(136, config)
     //post请求时，判断头部是什么
-    if(config.method === 'post') {
+    /*if(config.method === 'post') {
       if(config.data&&config.data.headers) {
         config.headers = headerConfig[config.data.headers].headers
         delete config.data.headers
       }
-    }
+    }*/
     // 登录流程控制中，根据本地是否存在token判断用户的登录情况
     // 但是即使token存在，也有可能token是过期的，所以在每次的请求头中携带token
     // 后台根据携带的token判断用户的登录情况，并返回给我们对应的状态码

@@ -32,7 +32,7 @@ export const personalSQL = {
     '${req.sex}',
     '${req.beforeLocation}',
     '${req.nowLocation}',
-    '${req.dateOfBirth}'
+    '${req.dateOfBirth}
     );` // 插入数据
   },
   search(userId){
@@ -41,5 +41,30 @@ export const personalSQL = {
   update(){
 
   }
+}
+
+
+/**
+ * 文件内容
+ */
+
+export const fileSQL ={
+  insert(req){
+    console.log(53, `INSERT INTO File (name,size,type)
+    VALUES(
+    '${req.name}',
+    '${req.size}',
+    '${req.type}',
+    );`)
+    return `INSERT INTO File (name,size,type)
+    VALUES(
+    '${req.name}',
+    '${req.size}',
+    '${req.type}'
+    );` // 插入数据
+  },
+  search(userId){
+    return `SELECT * FROM File;`
+  },
 }
 

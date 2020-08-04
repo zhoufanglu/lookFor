@@ -6,7 +6,7 @@ import store from '@/request/api/module/store';
 import user from '@/request/api/module/user';
 import relative from '@/request/api/module/relative';
 import personal from '@/request/api/module/personal';
-import files from '@/request/api/module/files';
+import tool from '@/request/api/module/tool';
 // 其他模块的接口……
 
 // 导出接口
@@ -15,6 +15,6 @@ export default {
   user,
   relative,
   personal,
-  files
+  tool
   // ……
 }

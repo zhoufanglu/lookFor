@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')//解析post参数
 const cors = require('cors')//解决跨域
 //token
 const jwt = require('jsonwebtoken')//引入jwt
+const multer = require('multer')// multer文件处理
 
 //import sqlFn from './mysql/select'
 import query from './mysql/config'//数据库封装
@@ -11,18 +12,24 @@ import checkApiToken from './plugin/check_api_token'
 
 
 //引入userSQL语句
-import {userSQL,personalSQL} from './mysql/sql/sqlLang'
+import {userSQL,personalSQL, fileSQL} from './mysql/sql/sqlLang'
 
 //引入公用方法插件
-import {analyticState} from './plugin/global'
+import { analyticState } from './plugin/global'
 
 const app = express()
 
 //解析application/json
 app.use(bodyParser.json());
 
+//设置文件上传路径
+const upload = multer({
+  dest: './img'
+})
+
 
 app.use(cors()) //解决跨域
+app.use(upload.any()) //处理上传的文件
 
 app.listen(8002,()=>{
   console.log('服务启动')
@@ -66,7 +73,7 @@ app.post('/login', async (req, res) => {
 })
 
 //屏蔽不需要token的接口
-const withoutName = ['register', 'test', 'getUserInfo']
+const withoutName = ['register', 'test', 'getUserInfo', '/tool/uploadImg']
 app.use((req,res,next)=>{
 	let isNeedToken = false
   const index = withoutName.findIndex(i=>{
@@ -195,5 +202,24 @@ app.post('/addPersonalInfo',async(req,res)=>{
     code: 200,
     msg: '保存成功',
     data: rows
+  })
+})
+
+/**
+ * 上传图片
+ */
+app.post('/tool/uploadImg',async(req,res)=>{
+  console.log(205, req.files[0])
+  const fileInfo = req.files[0]
+  const params = {
+    name: fileInfo.originalname,
+    size: fileInfo.encoding,
+    type: fileInfo.mimetype
+  }
+  const rows = await query(fileSQL.insert(params))
+  res.json({
+    code: 200,
+    msg: '上传成功',
+    data: '200'
   })
 })

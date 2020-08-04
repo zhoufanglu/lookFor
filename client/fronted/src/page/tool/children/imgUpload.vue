@@ -18,7 +18,6 @@
   </div>
 </template>
 <script>
- 
   export default {
     name: '',
     components: {  },
@@ -59,15 +58,28 @@
         })
       },
       upload() {
-        this.$api.files.uploadImg(
-          {fileList: 'fileTest'}
-        )
-        .then(res=>{
+        //console.log(62, this.fileList)
+        //模拟form对象
+        let formData = new FormData
+
+        const filePromise = new Promise(resolve => {
+          this.fileList.forEach((file, index) => {
+            formData.append('imgList', file)
+          })
+          //formData.get('imgList')
+          resolve(formData)
+        })
+        filePromise.then(res => {
+          this.$api.tool.uploadImg(
+            res
+          )
+            .then(res => {
+            })
         })
       }
       //一般方法
       /*imgFileChange(e) {
-        this.fileList = e.target.files
+        this.fileList = e.target.tool
 
         let reader, promiseList = []
         //响应图片获取的事件
