@@ -74,6 +74,7 @@
             res
           )
             .then(res => {
+              this.$notify({type: 'success', message: '上传成功'})
             })
         })
       }

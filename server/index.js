@@ -223,3 +223,16 @@ app.post('/tool/uploadImg',async(req,res)=>{
     data: '200'
   })
 })
+
+/**
+ * 图片获取
+**/
+
+app.get('/tool/getImgNameList',async(req,res)=>{
+  const rows = await query(fileSQL.search(100))
+  res.json({
+    code: 200,
+    msg: '查找成功',
+    data: rows
+  })
+})

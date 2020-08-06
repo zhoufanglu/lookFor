@@ -50,12 +50,6 @@ export const personalSQL = {
 
 export const fileSQL ={
   insert(req){
-    console.log(53, `INSERT INTO File (name,size,type)
-    VALUES(
-    '${req.name}',
-    '${req.size}',
-    '${req.type}',
-    );`)
     return `INSERT INTO File (name,size,type)
     VALUES(
     '${req.name}',
@@ -63,8 +57,8 @@ export const fileSQL ={
     '${req.type}'
     );` // 插入数据
   },
-  search(userId){
-    return `SELECT * FROM File;`
+  search(number){
+    return `SELECT * FROM File LIMIT 0,${number};`
   },
 }
 
