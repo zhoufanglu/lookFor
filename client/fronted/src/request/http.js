@@ -121,7 +121,6 @@ const instance = axios.create({
  * 每次请求前，如果存在token则在请求头中携带token
  */
 instance.interceptors.request.use(config => {
-    console.log(136, config)
     //post请求时，判断头部是什么
     /*if(config.method === 'post') {
       if(config.data&&config.data.headers) {

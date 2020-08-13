@@ -26,20 +26,24 @@
       }
     },
     created() {
-      this.$api.user.getUserInfo({password: 123456})
-        .then(res => {
-          console.log(14, res.data.data)
-          this.users = res.data.data
-        })
-      /*this.$api.user.getUserInfoPost({password: 123456})
-        .then(res => {
-          console.log(14, res.data.data)
-          this.users = res.data.data
-        })*/
+      //模拟n次
+      let n = 1
+      while (n>0){
+        this.getUserInfo()
+        n--
+      }
     },
     mounted() {
     },
-    methods: {}
+    methods: {
+      getUserInfo() {
+        this.$api.user.getUserInfo({password: 123456})
+          .then(res => {
+            console.log(14, res.data.data)
+            this.users = res.data.data
+          })
+      }
+    }
   }
 </script>
 <style lang="scss" scoped>

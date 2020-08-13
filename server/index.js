@@ -3,7 +3,11 @@ const bodyParser = require('body-parser')//解析post参数
 const cors = require('cors')//解决跨域
 //token
 const jwt = require('jsonwebtoken')//引入jwt
+
+/**********************文件上传***********************/
 const multer = require('multer')// multer文件处理
+const fs = require('fs')
+const path = require('path')
 
 //import sqlFn from './mysql/select'
 import query from './mysql/config'//数据库封装
@@ -12,10 +16,10 @@ import checkApiToken from './plugin/check_api_token'
 
 
 //引入userSQL语句
-import {userSQL,personalSQL, fileSQL} from './mysql/sql/sqlLang'
+import {userSQL, personalSQL, fileSQL} from './mysql/sql/sqlLang'
 
 //引入公用方法插件
-import { analyticState } from './plugin/global'
+import {analyticState} from './plugin/global'
 
 const app = express()
 
@@ -31,14 +35,14 @@ const upload = multer({
 app.use(cors()) //解决跨域
 app.use(upload.any()) //处理上传的文件
 
-app.listen(8002,()=>{
+app.listen(8002, () => {
   console.log('服务启动')
 })
 
 let loginState = 'user'
 
 //拦截器
-app.all('*',(req,res,next)=>{
+app.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");//允许所有跨域请求
   next() //向下执行
   /*if(req.method=="OPTIONS") res.send(200);/!*让options请求快速返回*!/
@@ -61,8 +65,8 @@ app.post('/login', async (req, res) => {
       //创建密钥
       const token = jwt.sign({username: req.body.username}, 'my_token'/*, {expiresIn: '2h'}*/)
       sendItem = analyticState('success', '登录成功', {
-        token:token,
-        userInfo:userInfo[0]
+        token: token,
+        userInfo: userInfo[0]
       })
     }
   } else if (req.body.loginState === 'visitor') {
@@ -74,24 +78,24 @@ app.post('/login', async (req, res) => {
 
 //屏蔽不需要token的接口
 const withoutName = ['register', 'test', 'getUserInfo', '/tool/uploadImg']
-app.use((req,res,next)=>{
-	let isNeedToken = false
-  const index = withoutName.findIndex(i=>{
+app.use((req, res, next) => {
+  let isNeedToken = false
+  const index = withoutName.findIndex(i => {
     return (req.originalUrl).includes(i)
   })
   isNeedToken = !index === -1
   //console.log(76, isNeedToken)
-  if(loginState === 'user'&& isNeedToken){
-    checkApiToken(req,res,next)
-  }else{
+  if (loginState === 'user' && isNeedToken) {
+    checkApiToken(req, res, next)
+  } else {
     next()
   }
   //console.log(63,req.originalUrl)
 })
 
 
-app.get('/test',(req,res)=>{
-  console.log(26,res.json('test111'))
+app.get('/test', (req, res) => {
+  console.log(26, res.json('test111'))
   /*return res.json({
     query:req.query,
     data:req.params,
@@ -112,7 +116,6 @@ app.get('/test',(req,res)=>{
 })*/
 
 
-
 //console.log(33,sqlFn.getAllNowLocation())
 //console.log(33,SqlFn)
 
@@ -122,7 +125,7 @@ app.get('/test',(req,res)=>{
  * 获取现代省份
  */
 //console.log(57,sqlFn.getAllNowLocation())
-app.post('/getNowLocation',async (req,res)=>{
+app.post('/getNowLocation', async (req, res) => {
   // 现在
   const rows = await query('select * from now_location;')
   //res.header({"Content-Type":"application/x-www-form-urlencoded"});
@@ -136,19 +139,19 @@ app.post('/getNowLocation',async (req,res)=>{
 /**
  * 注册
  */
-app.post('/register',async (req,res)=>{
+app.post('/register', async (req, res) => {
   //console.log(79,sqlLang.getUserByNickname('admin'))
   const userInfo = await query(userSQL.getUserByNickname(req.body.username))
   //先判断有没有注册过
   //console.log(50,userInfo)
   let sendItem = {}
-  if(userInfo.length === 0){
-    console.log(97,userSQL.insert(req.body.username,req.body.password))
-    const insertUser =  await query(userSQL.insert(req.body.username,req.body.password))
-    sendItem = analyticState('success','注册成功',req.body)
+  if (userInfo.length === 0) {
+    console.log(97, userSQL.insert(req.body.username, req.body.password))
+    const insertUser = await query(userSQL.insert(req.body.username, req.body.password))
+    sendItem = analyticState('success', '注册成功', req.body)
     //console.log(99,insertUser)
-  }else{
-    sendItem = analyticState('err','该用户名已经存在',userInfo)
+  } else {
+    sendItem = analyticState('err', '该用户名已经存在', userInfo)
   }
   //若没有，注册成功
   res.json(sendItem)
@@ -157,18 +160,22 @@ app.post('/register',async (req,res)=>{
 /**
  * 获取用户账号密码
  */
-app.get('/getUserInfo',async (req,res)=>{
-	const password = req.query.password
-	if(password === '123456') {
-		const userInfo = await query(userSQL.getUserInfo())
-		res.json(analyticState('success','获取成功',userInfo))
-	}
+app.get('/getUserInfo', async (req, res) => {
+  const password = req.query.password
+  if (password === '123456') {
+    const userInfo = await query(userSQL.getUserInfo())
+    res.json(analyticState('success', '获取成功', userInfo))
+    /*res.writeHead( 400, 'Current password does not match', {'content-type' : 'text/plain'});
+    res.end( 'Current value does not match');
+
+    return*/
+  }
 })
 /**
  * 获取亲戚列表
  */
 
-app.post('/getRelative',async (req,res)=>{
+app.post('/getRelative', async (req, res) => {
   // 现在
   const rows = await query('select * from relative_name;')
   //res.header({"Content-Type":"application/x-www-form-urlencoded"});
@@ -182,7 +189,7 @@ app.post('/getRelative',async (req,res)=>{
 /**
  * 根据user_id 查找个人信息
  */
-app.post('/personal/search',async (req,res)=>{
+app.post('/personal/search', async (req, res) => {
   //console.log(162,req.body)
   const rows = await query(personalSQL.search(req.body.userId))
   //res.header({"Content-Type":"application/x-www-form-urlencoded"});
@@ -196,7 +203,7 @@ app.post('/personal/search',async (req,res)=>{
 /**
  * 个人信息的填写
  */
-app.post('/addPersonalInfo',async(req,res)=>{
+app.post('/addPersonalInfo', async (req, res) => {
   const rows = await query(personalSQL.insert(req.body))
   res.json({
     code: 200,
@@ -208,27 +215,60 @@ app.post('/addPersonalInfo',async(req,res)=>{
 /**
  * 上传图片
  */
-app.post('/tool/uploadImg',async(req,res)=>{
-  console.log(205, req.files[0])
-  const fileInfo = req.files[0]
-  const params = {
-    name: fileInfo.originalname,
-    size: fileInfo.encoding,
-    type: fileInfo.mimetype
-  }
-  const rows = await query(fileSQL.insert(params))
-  res.json({
-    code: 200,
-    msg: '上传成功',
-    data: '200'
+app.post('/tool/uploadImg',
+  /*upload.array('files', 5),*/
+  async (req, res) => {
+    const imgList = req.files//客户端的文件信息列表
+    imgList.forEach(imgInfo=>{
+      const fileInfo = imgInfo
+      const params = {
+        name: fileInfo.originalname,
+        size: fileInfo.encoding,
+        type: fileInfo.mimetype,
+        path: fileInfo.path
+      }
+      //给文件命名
+      const newFile = `./img/${params.name}`
+      const oldFile = fileInfo.path
+      /**
+       * 对文件进行改名
+       * oldFile, newFile, callback
+       */
+      fs.rename(oldFile, newFile, async err => {
+        if (err) {
+          res.json({
+            code: 500,
+            msg: '失败',
+            data: '500'
+          })
+        } else {
+          //判断有没有相同的文件，没有再插入
+          const imgList = await query(fileSQL.searchAll())
+          const findIndex = imgList.findIndex(i=>i.name === fileInfo.originalname)
+          if(findIndex===-1){
+            //插入
+            const rows = await query(fileSQL.insert(params))
+          }
+        }
+      })
+    })
+
+    console.log(250, '上传成功')
+    res.json({
+      code: 200,
+      msg: '文件上传成功',
+      data: '200'
+    })
+
+    //查找数据库内的数据
+    //const imgList = await query(fileSQL.search(1000))
   })
-})
 
 /**
  * 图片获取
-**/
+ **/
 
-app.get('/tool/getImgNameList',async(req,res)=>{
+app.get('/tool/getImgNameList', async (req, res) => {
   const rows = await query(fileSQL.search(100))
   res.json({
     code: 200,

@@ -60,5 +60,8 @@ export const fileSQL ={
   search(number){
     return `SELECT * FROM File LIMIT 0,${number};`
   },
+  searchAll(){
+    return `SELECT * FROM File;`
+  },
 }
 
