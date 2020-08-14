@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken')//引入jwt
 /**********************文件上传***********************/
 const multer = require('multer')// multer文件处理
 const fs = require('fs')
-const path = require('path')
 
 //import sqlFn from './mysql/select'
 import query from './mysql/config'//数据库封装
