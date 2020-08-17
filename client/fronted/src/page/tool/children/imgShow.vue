@@ -1,14 +1,18 @@
 <template>
   <div class="p-img-show">
+    <van-button type="info"
+      size="small"
+      @click="deleteImg"
+    >删除选中</van-button>
     <ul>
       <li
           v-for="(i,index) in imgList"
           :key="index"
-          @click="showImg(i)"
       >
         <van-checkbox v-model="i.isCheck"></van-checkbox>
 
         <van-image
+            @click="showImg(i)"
             round
             width="100"
             height="100"
@@ -32,7 +36,6 @@
 
     <van-popup v-model="popUp.show">
       <van-image
-          round
           :src="popUp.img.path"
       />
     </van-popup>
@@ -41,6 +44,7 @@
 </template>
 <script>
   import base from '@/request/api/base.js'
+  import eventBus from "@/assets/js/utils/eventBus"
   export default {
     name: '',
     components: {},
@@ -59,11 +63,20 @@
       this.getImgNameList()
     },
     mounted() {
+      eventBus.$on('imgUploadSuccess',(_)=>{
+        this.$nextTick(()=>{
+          this.getImgNameList()
+        })
+      })
+    },
+    beforeDestroy () {
+      eventBus.$bus.off('imgUploadSuccess')
     },
     methods: {
       async getImgNameList() {
         const arr = await this.$api.tool.getImgNameList(100)
         const imgList = arr.data.data
+        this.imgList = []
         imgList.forEach((img, index)=>{
           this.imgList.push(
             {
@@ -81,18 +94,26 @@
         console.log(img)
         this.popUp.show = true
         this.popUp.img = img
+      },
+      async deleteImg() {
+        const list = this.imgList.filter(i=>i.isCheck)
+        const ids = list.map(i=>i.id).join(',')
+        const res = await this.$api.tool.delImg({ids: ids})
+        if(res.data.code === 200){
+          console.log('删除成功')
+          this.getImgNameList()
+        }
       }
     }
   }
 </script>
 <style lang="scss" scoped>
   .p-img-show {
+    padding: 10px;
     ul{
-      margin-top: 10px;
       li{
         @include vertical-center;
         justify-content: flex-start;
-        padding-left: 10px;
         cursor: pointer;
         .van-checkbox{
           padding: 10px;

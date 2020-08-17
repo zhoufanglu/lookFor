@@ -25,6 +25,12 @@ const tool = {
       /*{ headers: 'form', ...params}*/
     )
   },
+  delImg(params) {
+    return axios.post(
+      `${base.nodeServer}/tool/delImg`,
+      params
+    )
+  },
 }
 
 export default tool

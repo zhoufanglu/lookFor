@@ -266,12 +266,22 @@ app.post('/tool/uploadImg',
 /**
  * 图片获取
  **/
-
 app.get('/tool/getImgNameList', async (req, res) => {
   const rows = await query(fileSQL.search(100))
   res.json({
     code: 200,
     msg: '查找成功',
     data: rows
+  })
+})
+
+/**
+ * 图片删除
+ **/
+app.post('/tool/delImg', async (req, res) => {
+  const rows = await query(fileSQL.del(req.body.ids))
+  res.json({
+    code: 200,
+    msg: '删除成功',
   })
 })

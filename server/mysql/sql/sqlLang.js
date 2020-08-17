@@ -60,6 +60,9 @@ export const fileSQL ={
   search(number){
     return `SELECT * FROM File LIMIT 0,${number};`
   },
+  del(ids){
+    return `DELETE FROM File where id in (${ids});`
+  },
   searchAll(){
     return `SELECT * FROM File;`
   },

@@ -18,6 +18,7 @@
   </div>
 </template>
 <script>
+  import eventBus from "@/assets/js/utils/eventBus"
   export default {
     name: '',
     components: {  },
@@ -61,7 +62,7 @@
         //console.log(62, this.fileList)
         //模拟form对象
         let formData = new FormData
-
+        eventBus.$emit('imgUploadSuccess')
         const filePromise = new Promise(resolve => {
           this.fileList.forEach((file, index) => {
             formData.append('imgList', file)
@@ -75,6 +76,8 @@
           )
             .then(res => {
               this.$notify({type: 'success', message: '上传成功'})
+              //响应同级组件事件
+              eventBus.$emit('uploadSuccess')
             })
         })
       }
