@@ -21,3 +21,5 @@ yarn-error.log*
 *.sw*
 
 server/node_modules
+client/fronted/dist
+client/fronted/node_modules
