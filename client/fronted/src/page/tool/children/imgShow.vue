@@ -4,6 +4,10 @@
       size="small"
       @click="deleteImg"
     >删除选中</van-button>
+    <!--<van-button type="danger"
+                size="small"
+                @click="deleteImg('all')"
+    >删除所有</van-button>-->
     <ul>
       <li
           v-for="(i,index) in imgList"
@@ -63,14 +67,14 @@
       this.getImgNameList()
     },
     mounted() {
-      eventBus.$on('imgUploadSuccess',(_)=>{
+      eventBus.$on('refreshImgs',(_)=>{
         this.$nextTick(()=>{
           this.getImgNameList()
         })
       })
     },
     beforeDestroy () {
-      eventBus.$bus.off('imgUploadSuccess')
+      eventBus.$bus.off('refreshImgs')
     },
     methods: {
       async getImgNameList() {
@@ -81,6 +85,7 @@
           this.imgList.push(
             {
               id: img.id,
+              name: img.name,
               isCheck: false,
               path: `${this.url.fileServer}/img/${img.name}`
             }
@@ -98,7 +103,8 @@
       async deleteImg() {
         const list = this.imgList.filter(i=>i.isCheck)
         const ids = list.map(i=>i.id).join(',')
-        const res = await this.$api.tool.delImg({ids: ids})
+        const names = list.map(i=>i.name).join(',')
+        const res = await this.$api.tool.delImg({ids: ids, names: names})
         if(res.data.code === 200){
           console.log('删除成功')
           this.getImgNameList()

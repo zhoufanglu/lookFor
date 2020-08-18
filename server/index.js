@@ -18,7 +18,7 @@ import checkApiToken from './plugin/check_api_token'
 import {userSQL, personalSQL, fileSQL} from './mysql/sql/sqlLang'
 
 //引入公用方法插件
-import {analyticState} from './plugin/global'
+import {analyticState, delImgs, deleteAll} from './plugin/global'
 
 const app = express()
 
@@ -217,6 +217,7 @@ app.post('/addPersonalInfo', async (req, res) => {
 app.post('/tool/uploadImg',
   /*upload.array('files', 5),*/
   async (req, res) => {
+    console.log(220, req.files)
     const imgList = req.files//客户端的文件信息列表
     imgList.forEach(imgInfo=>{
       const fileInfo = imgInfo
@@ -279,6 +280,8 @@ app.get('/tool/getImgNameList', async (req, res) => {
  * 图片删除
  **/
 app.post('/tool/delImg', async (req, res) => {
+  delImgs({names: req.body.names})
+  //deleteAll('./testImg')
   const rows = await query(fileSQL.del(req.body.ids))
   res.json({
     code: 200,

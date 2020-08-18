@@ -66,6 +66,7 @@
         const filePromise = new Promise(resolve => {
           this.fileList.forEach((file, index) => {
             formData.append('imgList', file)
+            formData.append('index', index)
           })
           //formData.get('imgList')
           resolve(formData)
@@ -77,7 +78,7 @@
             .then(res => {
               this.$notify({type: 'success', message: '上传成功'})
               //响应同级组件事件
-              eventBus.$emit('uploadSuccess')
+              eventBus.$emit('refreshImgs')
             })
         })
       }
