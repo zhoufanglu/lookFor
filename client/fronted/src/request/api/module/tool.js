@@ -31,6 +31,11 @@ const tool = {
       params
     )
   },
+  delAllImg() {
+    return axios.post(
+      `${base.nodeServer}/tool/delAllImg`,
+    )
+  },
 }
 
 export default tool

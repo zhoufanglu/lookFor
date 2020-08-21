@@ -4,10 +4,10 @@
       size="small"
       @click="deleteImg"
     >删除选中</van-button>
-    <!--<van-button type="danger"
+    <van-button type="danger"
                 size="small"
-                @click="deleteImg('all')"
-    >删除所有</van-button>-->
+                @click="delAll"
+    >清空所有数据</van-button>
     <ul>
       <li
           v-for="(i,index) in imgList"
@@ -109,6 +109,10 @@
           console.log('删除成功')
           this.getImgNameList()
         }
+      },
+      async delAll() {
+        const res = await this.$api.tool.delAllImg()
+        this.getImgNameList()
       }
     }
   }

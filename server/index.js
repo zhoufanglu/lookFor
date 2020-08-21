@@ -164,6 +164,7 @@ app.get('/getUserInfo', async (req, res) => {
   if (password === '123456') {
     const userInfo = await query(userSQL.getUserInfo())
     res.json(analyticState('success', '获取成功', userInfo))
+    //res.send('aaaa')
     /*res.writeHead( 400, 'Current password does not match', {'content-type' : 'text/plain'});
     res.end( 'Current value does not match');
 
@@ -246,6 +247,7 @@ app.post('/tool/uploadImg',
           const imgList = await query(fileSQL.searchAll())
           const findIndex = imgList.findIndex(i=>i.name === fileInfo.originalname)
           if(findIndex===-1){
+            console.log(250,` 插入数据库成功`)
             //插入
             const rows = await query(fileSQL.insert(params))
           }
@@ -281,10 +283,22 @@ app.get('/tool/getImgNameList', async (req, res) => {
  **/
 app.post('/tool/delImg', async (req, res) => {
   delImgs({names: req.body.names})
-  //deleteAll('./testImg')
   const rows = await query(fileSQL.del(req.body.ids))
   res.json({
     code: 200,
     msg: '删除成功',
+  })
+})
+
+/**
+ * 图片删除所有
+ **/
+app.post('/tool/delAllImg', async (req, res) => {
+  deleteAll('./img')
+  //deleteAll('./testImg')
+  const rows = await query(fileSQL.delAll(req.body.ids))
+  res.json({
+    code: 200,
+    msg: '数据清除成功',
   })
 })

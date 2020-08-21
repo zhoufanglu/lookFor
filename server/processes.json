@@ -9,6 +9,7 @@
       "out_file": "./logs/app-out.log",
       "exec_mode":"fork",
       "watch": true,
+      "ignore_watch": "./logs",
       "env": {
         "COMMON_VARIABLE": "true"
       },

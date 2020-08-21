@@ -63,6 +63,9 @@ export const fileSQL ={
   del(ids){
     return `DELETE FROM File where id in (${ids});`
   },
+  delAll(){
+    return 'DELETE FROM File;'
+  },
   searchAll(){
     return `SELECT * FROM File;`
   },
