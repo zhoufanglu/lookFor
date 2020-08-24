@@ -9,7 +9,7 @@ const base = {
   nodeServer: process.env.NODE_ENV === 'development'?
   'http://127.0.0.1:8002':"http://119.45.53.85:8002",
   fileServer: process.env.NODE_ENV === 'development'?
-    'http://10.0.0.64:8000/server':"http://119.45.53.85/lookFor/server",
+    'http://10.0.0.64:8000':"http://119.45.53.85/lookFor/server",
   api: '/api' //本地服务开发利用proxy内的代理访问
 }
 

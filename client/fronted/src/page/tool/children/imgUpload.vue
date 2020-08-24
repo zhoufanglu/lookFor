@@ -65,7 +65,7 @@
         eventBus.$emit('imgUploadSuccess')
         const filePromise = new Promise(resolve => {
           this.fileList.forEach((file, index) => {
-            formData.append('imgList', file)
+            formData.append('imgFile', file)
             formData.append('index', index)
           })
           //formData.get('imgList')

@@ -3,6 +3,7 @@
  */
 export const userSQL = {
   insert(userName,password){
+    console.log(6666, userName)
     return `INSERT INTO User(userName,password) VALUES('${userName}','${password}');` // 插入数据
   },
   //drop: 'DROP TABLE User', // 删除表中所有的数据
@@ -51,11 +52,7 @@ export const personalSQL = {
 export const fileSQL ={
   insert(req){
     return `INSERT INTO File (name,size,type)
-    VALUES(
-    '${req.name}',
-    '${req.size}',
-    '${req.type}'
-    );` // 插入数据
+    VALUES ${req};` // 插入数据
   },
   search(number){
     return `SELECT * FROM File LIMIT 0,${number};`

@@ -218,8 +218,8 @@ app.post('/addPersonalInfo', async (req, res) => {
 app.post('/tool/uploadImg',
   /*upload.array('files', 5),*/
   async (req, res) => {
-    console.log(220, req.files)
     const imgList = req.files//客户端的文件信息列表
+    let imgSqlList = [] //存入数据库的数据
     imgList.forEach(imgInfo=>{
       const fileInfo = imgInfo
       const params = {
@@ -232,11 +232,18 @@ app.post('/tool/uploadImg',
       const newFile = `./img/${params.name}`
       const oldFile = fileInfo.path
       /**
-       * 对文件进行改名
+       * 对文件进行改名-同步
        * oldFile, newFile, callback
        */
-      fs.rename(oldFile, newFile, async err => {
+      fs.renameSync(oldFile,newFile)
+      imgSqlList.push({
+        name: params.name,
+        size: params.size,
+        type: params.type
+      })
+      /*fs.rename(oldFile, newFile, async err => {
         if (err) {
+          console.log(239, err)
           res.json({
             code: 500,
             msg: '失败',
@@ -245,25 +252,39 @@ app.post('/tool/uploadImg',
         } else {
           //判断有没有相同的文件，没有再插入
           const imgList = await query(fileSQL.searchAll())
+          console.log(247, imgList)
           const findIndex = imgList.findIndex(i=>i.name === fileInfo.originalname)
           if(findIndex===-1){
             console.log(250,` 插入数据库成功`)
             //插入
             const rows = await query(fileSQL.insert(params))
           }
+          imgSqlList.push(params)
+          console.log(250, '上传成功')
+          //const rows = await query(fileSQL.insert(params))
         }
-      })
+      })*/
     })
 
-    console.log(250, '上传成功')
+    //把对象的转成纯数组
+    var values = [];
+    imgSqlList.forEach(function(n, i){
+      var _arr = [];
+      for(var m in n){
+        _arr.push(n[m]);
+      }
+      values.push(_arr);
+    })
+
+    //console.log(279, imgSqlList)
+    var sql = "INSERT INTO File (name,size,type) VALUES ?";
+    const rows = await query(sql,[values])
     res.json({
       code: 200,
       msg: '文件上传成功',
       data: '200'
     })
 
-    //查找数据库内的数据
-    //const imgList = await query(fileSQL.search(1000))
   })
 
 /**
@@ -302,3 +323,8 @@ app.post('/tool/delAllImg', async (req, res) => {
     msg: '数据清除成功',
   })
 })
+
+process.on('uncaughtException', function(err) {
+  console.log('Caught exception2222222222: ' + err);
+  throw err;
+});

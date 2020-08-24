@@ -49,3 +49,119 @@
 2020-08-21 16:19 +08:00:     at new Promise (<anonymous>)
 2020-08-21 16:19 +08:00:     at E:\project\study\lookFor\server\index.js:17:99
 2020-08-21 16:19 +08:00:     at E:/project/study/lookFor/server/index.js:297:1
+2020-08-21 17:00 +08:00: Error: ER_DUP_ENTRY: Duplicate entry '' for key 'PRIMARY'
+2020-08-21 17:00 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-08-21 17:00 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-08-21 17:00 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-21 17:00 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-08-21 17:00 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-08-21 17:00 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-08-21 17:00 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-08-21 17:00 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-21 17:00 +08:00:     at Socket.emit (events.js:210:5)
+2020-08-21 17:00 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-08-21 17:00 +08:00:     --------------------
+2020-08-21 17:00 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-08-21 17:00 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-08-21 17:00 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-08-21 17:00 +08:00:     at Ping.onOperationComplete (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:110:5)
+2020-08-21 17:00 +08:00:     at Ping.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-21 17:00 +08:00:     at Ping._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-08-21 17:00 +08:00:     at Ping.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-08-21 17:00 +08:00:     at Ping.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-08-21 17:00 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-21 17:00 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-08-21 17:00 +08:00:   code: 'ER_DUP_ENTRY',
+2020-08-21 17:00 +08:00:   errno: 1062,
+2020-08-21 17:00 +08:00:   sqlMessage: "Duplicate entry '' for key 'PRIMARY'",
+2020-08-21 17:00 +08:00:   sqlState: '23000',
+2020-08-21 17:00 +08:00:   index: 0,
+2020-08-21 17:00 +08:00:   sql: "INSERT INTO User(userName,password) VALUES('xxxx','xxxxx');"
+2020-08-21 17:00 +08:00: }
+2020-08-21 17:01 +08:00: Error: ER_DUP_ENTRY: Duplicate entry '' for key 'PRIMARY'
+2020-08-21 17:01 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-08-21 17:01 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-08-21 17:01 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-21 17:01 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-08-21 17:01 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-08-21 17:01 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-08-21 17:01 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-08-21 17:01 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-21 17:01 +08:00:     at Socket.emit (events.js:210:5)
+2020-08-21 17:01 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-08-21 17:01 +08:00:     --------------------
+2020-08-21 17:01 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-08-21 17:01 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-08-21 17:01 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-08-21 17:01 +08:00:     at Ping.onOperationComplete (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:110:5)
+2020-08-21 17:01 +08:00:     at Ping.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-21 17:01 +08:00:     at Ping._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-08-21 17:01 +08:00:     at Ping.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-08-21 17:01 +08:00:     at Ping.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-08-21 17:01 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-21 17:01 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-08-21 17:01 +08:00:   code: 'ER_DUP_ENTRY',
+2020-08-21 17:01 +08:00:   errno: 1062,
+2020-08-21 17:01 +08:00:   sqlMessage: "Duplicate entry '' for key 'PRIMARY'",
+2020-08-21 17:01 +08:00:   sqlState: '23000',
+2020-08-21 17:01 +08:00:   index: 0,
+2020-08-21 17:01 +08:00:   sql: "INSERT INTO User(userName,password) VALUES('xxxx','xxxxx');"
+2020-08-21 17:01 +08:00: }
+2020-08-21 17:02 +08:00: Error: ER_DUP_ENTRY: Duplicate entry '' for key 'PRIMARY'
+2020-08-21 17:02 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-08-21 17:02 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-08-21 17:02 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-21 17:02 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-08-21 17:02 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-08-21 17:02 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-08-21 17:02 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-08-21 17:02 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-21 17:02 +08:00:     at Socket.emit (events.js:210:5)
+2020-08-21 17:02 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-08-21 17:02 +08:00:     --------------------
+2020-08-21 17:02 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-08-21 17:02 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-08-21 17:02 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-08-21 17:02 +08:00:     at Ping.onOperationComplete (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:110:5)
+2020-08-21 17:02 +08:00:     at Ping.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-21 17:02 +08:00:     at Ping._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-08-21 17:02 +08:00:     at Ping.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-08-21 17:02 +08:00:     at Ping.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-08-21 17:02 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-21 17:02 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-08-21 17:02 +08:00:   code: 'ER_DUP_ENTRY',
+2020-08-21 17:02 +08:00:   errno: 1062,
+2020-08-21 17:02 +08:00:   sqlMessage: "Duplicate entry '' for key 'PRIMARY'",
+2020-08-21 17:02 +08:00:   sqlState: '23000',
+2020-08-21 17:02 +08:00:   index: 0,
+2020-08-21 17:02 +08:00:   sql: "INSERT INTO User(userName,password) VALUES('xxxx','xxxxx');"
+2020-08-21 17:02 +08:00: }
+2020-08-24 18:24 +08:00: Error: ER_PARSE_ERROR: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+2020-08-24 18:24 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-08-24 18:24 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-08-24 18:24 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-24 18:24 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-08-24 18:24 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-08-24 18:24 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-08-24 18:24 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-08-24 18:24 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-24 18:24 +08:00:     at Socket.emit (events.js:210:5)
+2020-08-24 18:24 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-08-24 18:24 +08:00:     --------------------
+2020-08-24 18:24 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-08-24 18:24 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-08-24 18:24 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-08-24 18:24 +08:00:     at Handshake.onConnect (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:64:7)
+2020-08-24 18:24 +08:00:     at Handshake.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-08-24 18:24 +08:00:     at Handshake._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-08-24 18:24 +08:00:     at Handshake.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-08-24 18:24 +08:00:     at Handshake.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-08-24 18:24 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-08-24 18:24 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-08-24 18:24 +08:00:   code: 'ER_PARSE_ERROR',
+2020-08-24 18:24 +08:00:   errno: 1064,
+2020-08-24 18:24 +08:00:   sqlMessage: "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1",
+2020-08-24 18:24 +08:00:   sqlState: '42000',
+2020-08-24 18:24 +08:00:   index: 0,
+2020-08-24 18:24 +08:00:   sql: 'DELETE FROM File where id in ();'
+2020-08-24 18:24 +08:00: }
