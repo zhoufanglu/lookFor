@@ -11,6 +11,7 @@ const vuexLocal = new VuexPersistence({
 export default new Vuex.Store({
   state: {
     token:null,
+    loading: false,
     userInfo:{
       userId: 0,
       isLogin: false,
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setLoading(state, val) {
+      state.loading = val
+    },
     //判断是否断网
     CHANGE_NETWORK(state,val){
       if(val === false){ //若断了网/直接去断网页面

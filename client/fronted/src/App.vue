@@ -1,10 +1,24 @@
 <template>
   <div id="app">
-
+    <Loading v-show="$store.state.loading"></Loading>
     <router-view></router-view>
   </div>
 </template>
-
+<script>
+  export default {
+    name: '',
+    components: {},
+    data() {
+      return {
+      }
+    },
+    created() {
+      //console.log(16, this.$store.state.loading)
+    },
+    mounted() {
+    },
+  }
+</script>
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

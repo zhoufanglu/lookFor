@@ -79,6 +79,7 @@
               this.$notify({type: 'success', message: '上传成功'})
               this.pathList = []
               this.uploadState = '全部上传成功'
+              this.this.fileList = []
               //响应同级组件事件
               eventBus.$emit('refreshImgs')
             })

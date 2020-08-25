@@ -218,10 +218,13 @@ app.post('/addPersonalInfo', async (req, res) => {
 app.post('/tool/uploadImg',
   /*upload.array('files', 5),*/
   async (req, res) => {
+    let msg = ''
     const imgList = req.files//客户端的文件信息列表
     let imgSqlList = [] //存入数据库的数据
-    imgList.forEach(imgInfo=>{
-      const fileInfo = imgInfo
+
+    const readSqlList = await query(fileSQL.searchAll()) //数据库查的图片数据
+    for(let i=0;i<imgList.length;i++){
+      const fileInfo = imgList[i]
       const params = {
         name: fileInfo.originalname,
         size: fileInfo.encoding,
@@ -236,56 +239,49 @@ app.post('/tool/uploadImg',
        * oldFile, newFile, callback
        */
       fs.renameSync(oldFile,newFile)
-      imgSqlList.push({
-        name: params.name,
-        size: params.size,
-        type: params.type
-      })
-      /*fs.rename(oldFile, newFile, async err => {
-        if (err) {
-          console.log(239, err)
-          res.json({
-            code: 500,
-            msg: '失败',
-            data: '500'
-          })
-        } else {
-          //判断有没有相同的文件，没有再插入
-          const imgList = await query(fileSQL.searchAll())
-          console.log(247, imgList)
-          const findIndex = imgList.findIndex(i=>i.name === fileInfo.originalname)
-          if(findIndex===-1){
-            console.log(250,` 插入数据库成功`)
-            //插入
-            const rows = await query(fileSQL.insert(params))
-          }
-          imgSqlList.push(params)
-          console.log(250, '上传成功')
-          //const rows = await query(fileSQL.insert(params))
-        }
-      })*/
-    })
 
-    //把对象的转成纯数组
-    var values = [];
-    imgSqlList.forEach(function(n, i){
-      var _arr = [];
-      for(var m in n){
-        _arr.push(n[m]);
+      //判断有没有相同的文件，没有再插入
+      const findIndex = readSqlList.findIndex(i=>i.name === fileInfo.originalname)
+      if(findIndex===-1){
+        console.log(250,` 插入数据库成功`)
+        msg = '没有重复数据，插入成功'
+        imgSqlList.push({
+          name: params.name,
+          size: params.size,
+          type: params.type
+        })
+      }else{
+        console.log('有重复数据')
+        msg = `有重复数据，插入成功,重复文件名为${readSqlList[findIndex].name}`
       }
-      values.push(_arr);
-    })
-
-    //console.log(279, imgSqlList)
-    var sql = "INSERT INTO File (name,size,type) VALUES ?";
-    const rows = await query(sql,[values])
+      //const rows = await query(fileSQL.insert(params))
+    }
+    if(imgSqlList.length!==0){
+      await imgInsert(imgSqlList)
+    }
     res.json({
       code: 200,
-      msg: '文件上传成功',
+      msg: msg,
       data: '200'
     })
 
   })
+
+
+async function imgInsert(imgSqlList) {
+  //把对象的转成纯数组
+  var values = [];
+  imgSqlList.forEach(function(n, i){
+    var _arr = [];
+    for(var m in n){
+      _arr.push(n[m]);
+    }
+    values.push(_arr);
+  })
+
+  var sql = "INSERT INTO File (name,size,type) VALUES ?";
+  const rows = await query(sql,[values])
+}
 
 /**
  * 图片获取
@@ -315,7 +311,7 @@ app.post('/tool/delImg', async (req, res) => {
  * 图片删除所有
  **/
 app.post('/tool/delAllImg', async (req, res) => {
-  deleteAll('./img')
+  deleteAll('img')
   //deleteAll('./testImg')
   const rows = await query(fileSQL.delAll(req.body.ids))
   res.json({

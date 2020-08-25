@@ -74,7 +74,7 @@
       })
     },
     beforeDestroy () {
-      eventBus.$bus.off('refreshImgs')
+      //eventBus.$bus.off('refreshImgs')
     },
     methods: {
       async getImgNameList() {
@@ -106,12 +106,13 @@
         const names = list.map(i=>i.name).join(',')
         const res = await this.$api.tool.delImg({ids: ids, names: names})
         if(res.data.code === 200){
-          console.log('删除成功')
+          this.$notify({type: 'success', message: '删除成功'})
           this.getImgNameList()
         }
       },
       async delAll() {
         const res = await this.$api.tool.delAllImg()
+        this.$notify({type: 'success', message: '删除成功'})
         this.getImgNameList()
       }
     }
