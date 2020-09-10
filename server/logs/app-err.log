@@ -658,3 +658,136 @@
 2020-08-25 14:56 +08:00:   index: 0,
 2020-08-25 14:56 +08:00:   sql: 'INSERT INTO File (name,size,type) VALUES '
 2020-08-25 14:56 +08:00: }
+2020-09-10 10:32 +08:00: Error: ER_NO_SUCH_TABLE: Table 'lookFor.person' doesn't exist
+2020-09-10 10:32 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-09-10 10:32 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-09-10 10:32 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-09-10 10:32 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Socket.emit (events.js:210:5)
+2020-09-10 10:32 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-09-10 10:32 +08:00:     --------------------
+2020-09-10 10:32 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-09-10 10:32 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-09-10 10:32 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-09-10 10:32 +08:00:     at Ping.onOperationComplete (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:110:5)
+2020-09-10 10:32 +08:00:     at Ping.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Ping._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-09-10 10:32 +08:00:     at Ping.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-09-10 10:32 +08:00:     at Ping.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-09-10 10:32 +08:00:   code: 'ER_NO_SUCH_TABLE',
+2020-09-10 10:32 +08:00:   errno: 1146,
+2020-09-10 10:32 +08:00:   sqlMessage: "Table 'lookFor.person' doesn't exist",
+2020-09-10 10:32 +08:00:   sqlState: '42S02',
+2020-09-10 10:32 +08:00:   index: 0,
+2020-09-10 10:32 +08:00:   sql: 'SELECT * FROM person WHERE user_id=1;'
+2020-09-10 10:32 +08:00: }
+2020-09-10 10:32 +08:00: Error: ER_NO_SUCH_TABLE: Table 'lookFor.now_location' doesn't exist
+2020-09-10 10:32 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-09-10 10:32 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-09-10 10:32 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-09-10 10:32 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Socket.emit (events.js:210:5)
+2020-09-10 10:32 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-09-10 10:32 +08:00:     --------------------
+2020-09-10 10:32 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-09-10 10:32 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-09-10 10:32 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-09-10 10:32 +08:00:     at Handshake.onConnect (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:64:7)
+2020-09-10 10:32 +08:00:     at Handshake.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Handshake._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-09-10 10:32 +08:00:     at Handshake.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-09-10 10:32 +08:00:     at Handshake.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-09-10 10:32 +08:00:   code: 'ER_NO_SUCH_TABLE',
+2020-09-10 10:32 +08:00:   errno: 1146,
+2020-09-10 10:32 +08:00:   sqlMessage: "Table 'lookFor.now_location' doesn't exist",
+2020-09-10 10:32 +08:00:   sqlState: '42S02',
+2020-09-10 10:32 +08:00:   index: 0,
+2020-09-10 10:32 +08:00:   sql: 'select * from now_location;'
+2020-09-10 10:32 +08:00: }
+2020-09-10 10:32 +08:00: Error: ER_NO_SUCH_TABLE: Table 'lookFor.now_location' doesn't exist
+2020-09-10 10:32 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-09-10 10:32 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-09-10 10:32 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-09-10 10:32 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Socket.emit (events.js:210:5)
+2020-09-10 10:32 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-09-10 10:32 +08:00:     --------------------
+2020-09-10 10:32 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-09-10 10:32 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-09-10 10:32 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-09-10 10:32 +08:00:     at Ping.onOperationComplete (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:110:5)
+2020-09-10 10:32 +08:00:     at Ping.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Ping._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-09-10 10:32 +08:00:     at Ping.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-09-10 10:32 +08:00:     at Ping.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-09-10 10:32 +08:00:   code: 'ER_NO_SUCH_TABLE',
+2020-09-10 10:32 +08:00:   errno: 1146,
+2020-09-10 10:32 +08:00:   sqlMessage: "Table 'lookFor.now_location' doesn't exist",
+2020-09-10 10:32 +08:00:   sqlState: '42S02',
+2020-09-10 10:32 +08:00:   index: 0,
+2020-09-10 10:32 +08:00:   sql: 'select * from now_location;'
+2020-09-10 10:32 +08:00: }
+2020-09-10 10:32 +08:00: Error: ER_NO_SUCH_TABLE: Table 'lookFor.person' doesn't exist
+2020-09-10 10:32 +08:00:     at Query.Sequence._packetToError (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:47:14)
+2020-09-10 10:32 +08:00:     at Query.ErrorPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Query.js:77:18)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10)
+2020-09-10 10:32 +08:00:     at Parser.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:43:10)
+2020-09-10 10:32 +08:00:     at Protocol.write (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:38:16)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:91:28)
+2020-09-10 10:32 +08:00:     at Socket.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Socket.emit (events.js:210:5)
+2020-09-10 10:32 +08:00:     at addChunk (_stream_readable.js:309:12)
+2020-09-10 10:32 +08:00:     --------------------
+2020-09-10 10:32 +08:00:     at Protocol._enqueue (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:144:48)
+2020-09-10 10:32 +08:00:     at PoolConnection.query (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:201:25)
+2020-09-10 10:32 +08:00:     at E:/project/study/lookFor/server/mysql/config.js:19:20
+2020-09-10 10:32 +08:00:     at Ping.onOperationComplete (E:\project\study\lookFor\server\node_modules\mysql\lib\Pool.js:110:5)
+2020-09-10 10:32 +08:00:     at Ping.<anonymous> (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:525:10)
+2020-09-10 10:32 +08:00:     at Ping._callback (E:\project\study\lookFor\server\node_modules\mysql\lib\Connection.js:491:16)
+2020-09-10 10:32 +08:00:     at Ping.Sequence.end (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:83:24)
+2020-09-10 10:32 +08:00:     at Ping.Sequence.OkPacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\sequences\Sequence.js:92:8)
+2020-09-10 10:32 +08:00:     at Protocol._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Protocol.js:291:23)
+2020-09-10 10:32 +08:00:     at Parser._parsePacket (E:\project\study\lookFor\server\node_modules\mysql\lib\protocol\Parser.js:433:10) {
+2020-09-10 10:32 +08:00:   code: 'ER_NO_SUCH_TABLE',
+2020-09-10 10:32 +08:00:   errno: 1146,
+2020-09-10 10:32 +08:00:   sqlMessage: "Table 'lookFor.person' doesn't exist",
+2020-09-10 10:32 +08:00:   sqlState: '42S02',
+2020-09-10 10:32 +08:00:   index: 0,
+2020-09-10 10:32 +08:00:   sql: 'SELECT * FROM person WHERE user_id=0;'
+2020-09-10 10:32 +08:00: }
+2020-09-10 10:36 +08:00: Error: ENOENT: no such file or directory, open 'E:\project\study\lookFor\server\img\b67dbdf5e7c5b751646b8a9e4d22602f'
+2020-09-10 10:37 +08:00: Error: ENOENT: no such file or directory, rename 'img\dc1f9bf681f24cc1174301465cb36b1d' -> '/img/ShowerHerdBoy00010.jpg'
+2020-09-10 10:37 +08:00:     at Object.renameSync (fs.js:643:3)
+2020-09-10 10:37 +08:00:     at _loop (E:/project/study/lookFor/server/index.js:241:10)
+2020-09-10 10:37 +08:00:     at _callee8$ (E:/project/study/lookFor/server/index.js:226:38)
+2020-09-10 10:37 +08:00:     at tryCatch (E:\project\study\lookFor\server\node_modules\babel-polyfill\node_modules\regenerator-runtime\runtime.js:65:40)
+2020-09-10 10:37 +08:00:     at Generator.invoke [as _invoke] (E:\project\study\lookFor\server\node_modules\babel-polyfill\node_modules\regenerator-runtime\runtime.js:303:22)
+2020-09-10 10:37 +08:00:     at Generator.prototype.<computed> [as next] (E:\project\study\lookFor\server\node_modules\babel-polyfill\node_modules\regenerator-runtime\runtime.js:117:21)
+2020-09-10 10:37 +08:00:     at step (E:\project\study\lookFor\server\index.js:60:191)
+2020-09-10 10:37 +08:00:     at E:\project\study\lookFor\server\index.js:60:361
+2020-09-10 10:37 +08:00:     at processTicksAndRejections (internal/process/task_queues.js:93:5) {
+2020-09-10 10:37 +08:00:   errno: -4058,
+2020-09-10 10:37 +08:00:   syscall: 'rename',
+2020-09-10 10:37 +08:00:   code: 'ENOENT',
+2020-09-10 10:37 +08:00:   path: 'img\\dc1f9bf681f24cc1174301465cb36b1d',
+2020-09-10 10:37 +08:00:   dest: '/img/ShowerHerdBoy00010.jpg'
+2020-09-10 10:37 +08:00: }

@@ -8,7 +8,7 @@
       "error_file": "./logs/app-err.log",
       "out_file": "./logs/app-out.log",
       "exec_mode":"fork",
-      "watch": true,
+      "watch": false,
       "ignore_watch": "./logs",
       "env": {
         "COMMON_VARIABLE": "true"

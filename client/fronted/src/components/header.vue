@@ -9,7 +9,7 @@
                     </svg>
                 </van-col>
                 <van-col span="20" class="title">
-                    {{name}}
+                    {{name}}（{{titleEnv}}）
                     <span class="username" v-if="userInfo.userName">({{userInfo.userName}})</span>
                 </van-col>
                 <van-col span="2">
@@ -36,6 +36,7 @@
     props:['name','isShowReturn','isShowLogout'],
     data() {
       return {
+        titleEnv: '',
         operateInfo:{
           show: false,
           actions: []
@@ -70,6 +71,7 @@
     },
     components: {},
     mounted() {
+      this.titleEnv = process.env.NODE_ENV === 'development'?'本地':'线上'
         //this.initHead()
     },
     computed:{

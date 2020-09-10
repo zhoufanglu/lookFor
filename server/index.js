@@ -18,7 +18,7 @@ import checkApiToken from './plugin/check_api_token'
 import {userSQL, personalSQL, fileSQL} from './mysql/sql/sqlLang'
 
 //引入公用方法插件
-import {analyticState, delImgs, deleteAll} from './plugin/global'
+import {analyticState, delImgs, emptyFile} from './plugin/global'
 
 const app = express()
 
@@ -232,7 +232,7 @@ app.post('/tool/uploadImg',
         path: fileInfo.path
       }
       //给文件命名
-      const newFile = `./img/${params.name}`
+      const newFile = `/img/${params.name}`
       const oldFile = fileInfo.path
       /**
        * 对文件进行改名-同步
@@ -311,12 +311,11 @@ app.post('/tool/delImg', async (req, res) => {
  * 图片删除所有
  **/
 app.post('/tool/delAllImg', async (req, res) => {
-  deleteAll('img')
-  //deleteAll('./testImg')
-  const rows = await query(fileSQL.delAll(req.body.ids))
+  emptyFile('img')
+  //const rows = await query(fileSQL.delAll(req.body.ids))
   res.json({
     code: 200,
-    msg: '数据清除成功',
+    msg: '数据所有清除成功',
   })
 })
 

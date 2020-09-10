@@ -43,6 +43,8 @@
             <van-row class="p-go-user">
               <van-col>
                 <router-link to="/userInfo">查看用户</router-link>
+                <br>
+                <router-link to="/tool">工具</router-link>
               </van-col>
             </van-row>
         </div>
