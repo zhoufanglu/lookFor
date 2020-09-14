@@ -31,6 +31,11 @@ const tool = {
       params
     )
   },
+  getUploadToken() {
+    return axios.post(
+      `${base.nodeServer}/tool/getUploadToken`,
+    )
+  },
   delAllImg() {
     return axios.post(
       `${base.nodeServer}/tool/delAllImg`,

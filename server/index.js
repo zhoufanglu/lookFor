@@ -22,6 +22,9 @@ import {analyticState, delImgs, emptyFile} from './plugin/global'
 
 const app = express()
 
+//七牛云上传token
+import uploadToken from "./plugin/qiniu";
+
 //解析application/json
 app.use(bodyParser.json());
 
@@ -232,14 +235,14 @@ app.post('/tool/uploadImg',
         path: fileInfo.path
       }
       //给文件命名
-      const newFile = `/img/${params.name}`
+      const newFile = `./img/${params.name}`
       const oldFile = fileInfo.path
       /**
        * 对文件进行改名-同步
        * oldFile, newFile, callback
        */
       fs.renameSync(oldFile,newFile)
-
+      console.log('修改成功了')
       //判断有没有相同的文件，没有再插入
       const findIndex = readSqlList.findIndex(i=>i.name === fileInfo.originalname)
       if(findIndex===-1){
@@ -312,14 +315,28 @@ app.post('/tool/delImg', async (req, res) => {
  **/
 app.post('/tool/delAllImg', async (req, res) => {
   emptyFile('img')
-  //const rows = await query(fileSQL.delAll(req.body.ids))
+  const rows = await query(fileSQL.delAll(req.body.ids))
+  console.log('数据库删除所有文件')
   res.json({
     code: 200,
     msg: '数据所有清除成功',
   })
 })
 
+/**
+ * 获取七牛云upload token
+ **/
+app.post('/tool/getUploadToken', async (req, res) => {
+  res.json({
+    code: 200,
+    msg: '请求成功',
+    data: uploadToken
+  })
+})
+
+
+/*
 process.on('uncaughtException', function(err) {
   console.log('Caught exception2222222222: ' + err);
   throw err;
-});
+});*/
