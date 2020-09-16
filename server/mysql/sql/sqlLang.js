@@ -68,3 +68,25 @@ export const fileSQL ={
   },
 }
 
+/**
+ * 七牛云文件内容
+ */
+
+export const qiniuFileSQL ={
+  insert(req){
+    return `INSERT INTO QiniuFile (qiniuHash,qiniuKey)
+    VALUES ${req};` // 插入数据
+  },
+  search(number){
+    return `SELECT * FROM QiniuFile;`
+  },
+  del(ids){
+    return `DELETE FROM File where id in (${ids});`
+  },
+  delAll(){
+    return 'DELETE FROM QiniuFile;'
+  },
+  searchAll(){
+    return `SELECT * FROM QiniuFile;`
+  },
+}

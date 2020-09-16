@@ -15,7 +15,7 @@ import checkApiToken from './plugin/check_api_token'
 
 
 //引入userSQL语句
-import {userSQL, personalSQL, fileSQL} from './mysql/sql/sqlLang'
+import {userSQL, personalSQL, fileSQL, qiniuFileSQL} from './mysql/sql/sqlLang'
 
 //引入公用方法插件
 import {analyticState, delImgs, emptyFile} from './plugin/global'
@@ -23,7 +23,7 @@ import {analyticState, delImgs, emptyFile} from './plugin/global'
 const app = express()
 
 //七牛云上传token
-import uploadToken from "./plugin/qiniu";
+import getUploadToken from "./plugin/qiniu";
 
 //解析application/json
 app.use(bodyParser.json());
@@ -272,6 +272,7 @@ app.post('/tool/uploadImg',
 
 
 async function imgInsert(imgSqlList) {
+  console.log(275, imgSqlList)
   //把对象的转成纯数组
   var values = [];
   imgSqlList.forEach(function(n, i){
@@ -281,8 +282,8 @@ async function imgInsert(imgSqlList) {
     }
     values.push(_arr);
   })
-
-  var sql = "INSERT INTO File (name,size,type) VALUES ?";
+  console.log(284, values)
+  var sql = "INSERT INTO File (name, size, type) VALUES ?";
   const rows = await query(sql,[values])
 }
 
@@ -330,10 +331,50 @@ app.post('/tool/getUploadToken', async (req, res) => {
   res.json({
     code: 200,
     msg: '请求成功',
-    data: uploadToken
+    data: getUploadToken()
   })
 })
 
+/**
+ * 七牛云文件存入数据库
+ **/
+app.post('/tool/addQiniuFile', async (req, res) => {
+  //查找有无重复的数据，根据Key判断
+  const readSqlList = await query(qiniuFileSQL.searchAll()) //数据库查的图片数据
+  console.log(344, readSqlList)
+  let msg = '插入成功'
+  let reqList = req.body.fileApiList
+  readSqlList.forEach(i=>{
+    reqList.forEach((req, index)=>{
+      if(req.key === i.qiniuKey){
+        msg = '有重复数据'
+        reqList.splice(index, 1)
+      }
+    })
+  })
+  console.log(345, reqList)
+  if(reqList.length!==0){
+    qiNiuimgInsert(reqList)
+  }
+  res.json({
+    code: 200,
+    msg: msg,
+  })
+})
+
+async function qiNiuimgInsert(imgSqlList) {
+  //把对象的转成纯数组
+  var values = [];
+  imgSqlList.forEach(function(n, i){
+    var _arr = [];
+    for(var m in n){
+      _arr.push(n[m]);
+    }
+    values.push(_arr);
+  })
+  var sql = "replace INTO QiniuFile (qiniuKey, qiniuHash) VALUES ?";
+  const rows = await query(sql,[values])
+}
 
 /*
 process.on('uncaughtException', function(err) {

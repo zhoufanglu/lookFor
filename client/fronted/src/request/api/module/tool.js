@@ -41,6 +41,13 @@ const tool = {
       `${base.nodeServer}/tool/delAllImg`,
     )
   },
+  /**********************七牛云数据***********************/
+  addQiniuFile(params) {
+    return axios.post(
+      `${base.nodeServer}/tool/addQiniuFile`,
+      params
+    )
+  },
 }
 
 export default tool

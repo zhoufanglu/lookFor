@@ -3,6 +3,16 @@
     <van-uploader v-model="fileList"
                   :after-read="afterRead"
                   multiple />
+    <span>{{ uploadState }}</span>
+    <van-button
+                size="small"
+                @click="getToken"
+    >刷新七牛的token</van-button>
+    
+    <van-button
+        size="small"
+        @click="addQiniuFile"
+    >保存到数据库</van-button>
   </div>
 </template>
 <script>
@@ -13,15 +23,13 @@ export default {
   components: {},
   data() {
     return {
-      AK: 'dZ5dM2GJ8wgeLpkbCcwmejkUd9ft7NPx_TEK9tAe',
-      SK: 'PwGVWInh9U4a912G85KQjCr7aEyL2kZSBEoZBdmt',
-      uploadToken: '',
+      uploadState: '',
       fileList: [
       ],
+      fileApiList: []
     }
   },
   created() {
-    console.log(19, qiniu)
     this.getUploadToken()
   },
   mounted() {
@@ -65,14 +73,18 @@ export default {
         //上传开始
         observable.subscribe({
           next(res){
+            _this.uploadState = '上传中'
             console.log('next', res)
           },
           error(err){
+            this.uploadState = '上传出错'
             console.log('err', err)
             _this.$notify({type: 'danger', message: err.message})
           },
           complete(res){
+            _this.uploadState = '上传完成'
             console.log('complete', res)
+            _this.fileApiList.push(res)
           }
         })
       })
@@ -93,6 +105,18 @@ export default {
       /*this.$api.user.getUserInfo({password: 123456})
       const res2 = await qiniu.getUploadUrl(config, this.uploadToken)
       console.log(44, this.uploadToken)*/
+    },
+    getToken() {
+      this.getUploadToken()
+    },
+    async addQiniuFile() {
+      if(this.fileApiList.length===0){
+        this.$notify({type: 'danger', message: '添加后保存'})
+        return false
+      }else{
+        const res = await this.$api.tool.addQiniuFile({fileApiList: this.fileApiList})
+        this.$notify({type: 'success', message: '保存成功'})
+      }
     }
   }
 }
