@@ -18,6 +18,7 @@ const tool = ()=> import('@/page/tool/tool.vue')
 const imgShow = ()=> import('@/page/tool/children/imgShow.vue')
 const imgUpload = ()=> import('@/page/tool/children/imgUpload.vue')
 const qiniuUpload = ()=> import('@/page/tool/children/qiniuUpload.vue')
+const qiniuImgShow = ()=> import('@/page/tool/children/qiniuImgShow.vue')
 
 
 
@@ -103,7 +104,15 @@ export default new Router({
           name:'qiniuUpload',
           component: qiniuUpload,
           meta:{
-            ZHName: '七牛云图片上传',
+            ZHName: '七牛云上传',
+          },
+        },
+        {
+          path:'/tool/qiniuImgShow',
+          name:'qiniuImgShow',
+          component: qiniuImgShow,
+          meta:{
+            ZHName: '七牛云展示',
           },
         },
       ]

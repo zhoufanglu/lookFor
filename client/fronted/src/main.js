@@ -16,13 +16,13 @@ import 'lib-flexible'
 
 import { Button, Row, Col,Field,Cell,CellGroup,Icon,Tag,NavBar,ActionSheet,Tab, Sidebar, SidebarItem,
   Tabs,RadioGroup, Radio,Picker,Popup,Dialog,DatetimePicker,Checkbox, CheckboxGroup, Image, Lazyload, Loading, Overlay,
-Uploader
+Uploader, Progress
 } from 'vant';
 
 Vue.use(Row).use(Col).use(Button).use(Field).use(CellGroup).use(Icon).use(Tag).use(NavBar).use(ActionSheet).
 use(Cell).use(Tab).use(Tabs).use(RadioGroup).use(Radio).use(Picker).use(Popup).use(Sidebar).use(SidebarItem)
   .use(Dialog).use(DatetimePicker).use(Checkbox).use(CheckboxGroup).use(Image).use(Lazyload).use(Loading)
-  .use(Overlay).use(Uploader)
+  .use(Overlay).use(Uploader).use(Progress)
 
 import prototype from '@/assets/js/prototype'
 Vue.use(prototype)

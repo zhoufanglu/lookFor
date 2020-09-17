@@ -25,9 +25,16 @@ export default new Vuex.Store({
       title:'',
       dataList:[],
       currentItem:''
+    },
+    /**********************七牛云***********************/
+    qiniu: {
+      token: ''
     }
   },
   mutations: {
+    setQiniu(state, val){
+      state.qiniu = Object.assign(state.qiniu, val)
+    },
     setLoading(state, val) {
       state.loading = val
     },
