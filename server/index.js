@@ -340,7 +340,7 @@ app.post('/tool/getUploadToken', async (req, res) => {
  **/
 app.post('/tool/addQiniuFile', async (req, res) => {
   //查找有无重复的数据，根据Key判断
-  const readSqlList = await query(qiniuFileSQL.searchAll()) //数据库查的图片数据
+  /*const readSqlList = await query(qiniuFileSQL.searchAll()) //数据库查的图片数据
   console.log(344, readSqlList)
   let msg = '插入成功'
   let reqList = req.body.fileApiList
@@ -351,10 +351,27 @@ app.post('/tool/addQiniuFile', async (req, res) => {
         reqList.splice(index, 1)
       }
     })
-  })
-  console.log(345, reqList)
-  if(reqList.length!==0){
-    qiNiuimgInsert(reqList)
+  })*/
+  let msg = ''
+  let reqList = req.body.fileApiList
+  let insertList = []
+  let repeatMsg = ''
+  for (const i of reqList) {
+    const rows = await query(qiniuFileSQL.search(i.key))
+    if (rows.length === 0) {
+      insertList.push(i)
+    } else {
+      repeatMsg += `${i.key}`
+    }
+  }
+  //有重复数据
+  if(repeatMsg){
+    msg = `插入成功， 重复数据为${repeatMsg}`
+  }else{
+    msg = '插入成功, 没有相同图片'
+  }
+  if(insertList.length!==0){
+    qiNiuimgInsert(insertList)
   }
   res.json({
     code: 200,
@@ -372,7 +389,7 @@ async function qiNiuimgInsert(imgSqlList) {
     }
     values.push(_arr);
   })
-  var sql = "replace INTO QiniuFile (qiniuKey, qiniuHash) VALUES ?";
+  var sql = "replace INTO QiniuFile (qiniuHash, qiniuKey) VALUES ?";
   const rows = await query(sql,[values])
 }
 

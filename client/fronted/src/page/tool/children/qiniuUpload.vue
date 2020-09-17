@@ -127,7 +127,7 @@ export default {
         return false
       }else{
         const res = await this.$api.tool.addQiniuFile({fileApiList: this.fileApiList})
-        this.$notify({type: 'success', message: '上传成功'})
+        this.$notify({type: 'success', message: res.data.msg})
       }
     }
   },

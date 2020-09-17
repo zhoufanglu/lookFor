@@ -77,8 +77,8 @@ export const qiniuFileSQL ={
     return `INSERT INTO QiniuFile (qiniuHash,qiniuKey)
     VALUES ${req};` // 插入数据
   },
-  search(number){
-    return `SELECT * FROM QiniuFile;`
+  search(key){
+    return `SELECT * FROM QiniuFile WHERE qiniuKey='${key}';`
   },
   del(ids){
     return `DELETE FROM File where id in (${ids});`
