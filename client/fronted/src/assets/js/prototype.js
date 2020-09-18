@@ -9,6 +9,7 @@ const prototype = ()=>{
   Vue.prototype.$tip = Toast
   Vue.prototype.$notify = Notify
   Vue.prototype.$Dialog = Dialog
+  Vue.prototype.$qiniuDomain = 'http://qgfmx93qu.hn-bkt.clouddn.com'
 }
 export default prototype
 

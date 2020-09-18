@@ -48,6 +48,11 @@ const tool = {
       params
     )
   },
+  getQiniufileInfo() {
+    return axios.get(
+      `${base.nodeServer}/tool/getQiniufileInfo`,
+    )
+  },
 }
 
 export default tool

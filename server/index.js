@@ -340,18 +340,6 @@ app.post('/tool/getUploadToken', async (req, res) => {
  **/
 app.post('/tool/addQiniuFile', async (req, res) => {
   //查找有无重复的数据，根据Key判断
-  /*const readSqlList = await query(qiniuFileSQL.searchAll()) //数据库查的图片数据
-  console.log(344, readSqlList)
-  let msg = '插入成功'
-  let reqList = req.body.fileApiList
-  readSqlList.forEach(i=>{
-    reqList.forEach((req, index)=>{
-      if(req.key === i.qiniuKey){
-        msg = '有重复数据'
-        reqList.splice(index, 1)
-      }
-    })
-  })*/
   let msg = ''
   let reqList = req.body.fileApiList
   let insertList = []
@@ -392,6 +380,18 @@ async function qiNiuimgInsert(imgSqlList) {
   var sql = "replace INTO QiniuFile (qiniuHash, qiniuKey) VALUES ?";
   const rows = await query(sql,[values])
 }
+
+/**
+ * 获取七牛云数据库文件信息
+ **/
+app.get('/tool/getQiniufileInfo', async (req, res) => {
+  const rows = await query(qiniuFileSQL.searchAll())
+  res.json({
+    code: 200,
+    msg: '请求成功',
+    data: rows
+  })
+})
 
 /*
 process.on('uncaughtException', function(err) {
