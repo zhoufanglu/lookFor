@@ -31,10 +31,6 @@
         </van-image>
 
 
-        <!--<img
-            :src="i.path"
-        >-->
-
       </li>
     </ul>
   </div>
@@ -69,6 +65,7 @@ export default {
           isCheck: false
         })
       })
+      console.log(72, this.imgList)
     },
     async delAll() {
       console.log(74, qiniu)

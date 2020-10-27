@@ -2,7 +2,6 @@
   <div class="p-img-upload">
     imgUpload
     <input type="file"
-           accept=".png, .jpg, .jpeg"
            multiple="multiple"
            name="imgFile"
            @change="imgFileChange"
